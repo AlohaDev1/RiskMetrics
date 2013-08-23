@@ -1,0 +1,70 @@
+﻿@model MetricsCorporation.Models.FileListModel
+
+<div id="fileListItemDetail" data-bind="with: selectedItem, kendoWindow: { isOpen: isOpenDetailView, visible: false, actions: ['Close', 'Minimize', 'Maximize', 'Refresh'], modal: true }">
+    <div>
+        <input type="button" value="Cancel" data-bind="click: $parent.backToList, visible: isEditMode()" class="k-button" />
+        <input type="button" value="Save" data-bind="click: $parent.saveItem, visible: isEditMode()" class="k-button" />
+
+        <input type="button" value="Add" data-bind="click: $parent.beginAddItem, visible: !isEditMode()" class="k-button" />
+        <input type="button" value="Edit" data-bind="click: $parent.beginEditItem, visible: !isEditMode()" class="k-button" />
+        <input type="button" value="Copy" data-bind="click: $parent.beginCopyItem, visible: !isEditMode()" class="k-button" />
+        <input type="button" value="Delete" data-bind="click: $parent.deleteItem, visible: !isEditMode()" class="k-button" />
+    </div>
+    <ul style="float: left; width: 500px">
+        <li data-bind="visible: !isEditMode()" >
+            @Html.DisplayNameFor(model => model.Id): <span data-bind="text: Id"></span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.UserName): <span data-bind="text: UserName, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: UserName, visible: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.Password): <span data-bind="text: Password, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: Password, visible: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.FilePath): <span data-bind="text: FilePath, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: FilePath, visible: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.LastLoginDate): <span data-bind="text: LastLoginDate, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: LastLoginDate, visible: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.States): <span data-bind="text: States, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: States, visible: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.ActivationDate): <span data-bind="text: ActivationDate, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: ActivationDate, visible: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.RenewalDate):<span data-bind="text: RenewalDate, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: RenewalDate, visible: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.ExpirationDate):<span data-bind="text: ExpirationDate, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: ExpirationDate, visible: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.CompanyName): <span data-bind="text: CompanyName, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: CompanyName, visible: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.Admin):<input type="checkbox" data-bind="checked: Admin, enable: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.CanexportList): <input type="checkbox" data-bind="checked: CanexportList, enable: isEditMode()" />
+        </li>   
+        <li>
+            @Html.DisplayNameFor(model => model.Name): <span data-bind="text: Name, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: Name, visible: isEditMode()" />
+        </li> 
+         <li>
+            @Html.DisplayNameFor(model => model.MaxReportViewsPerMonth): <span data-bind="text: MaxReportViewsPerMonth, visible: !isEditMode()"></span>
+            <input type="number" data-bind="value: MaxReportViewsPerMonth, visible: isEditMode()" />
+        </li> 
+        
+    </ul>
+    
+</div>

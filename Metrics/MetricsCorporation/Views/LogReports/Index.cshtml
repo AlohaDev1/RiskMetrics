@@ -1,0 +1,32 @@
+﻿<script type="text/javascript" src="@Url.Content("~/Scripts/adminlogs/DataSources.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/helpers/KoBindings.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/app/MasterIdItemModel.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/adminlogs/AdminLogsModel.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/adminlogs/NumberOfLoginsModel.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/adminlogs/TotalReportsViewedModel.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/adminlogs/UsersModel.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        ko.navigation.setNamespace(MetricsCorporationApp);
+
+        var myapp = new MetricsCorporationApp.AdminLogsModel();
+        myapp.init();
+        ko.applyBindings(myapp);
+
+        //for debug
+        window.vm = myapp;
+    });
+</script>
+
+
+<script id="UsersView" type="text/html">
+    @Html.Partial("_UsersView")    
+</script>
+<script type="text/html" id="NumberOfLoginsView">
+    @Html.Partial("_NumberOfLogins")
+</script>
+<script type="text/html" id="TotalReportsViewedView">
+    @Html.Partial("_TotalReports")
+</script>
+<div class="content" data-bind="navigation: navigation">
+</div>

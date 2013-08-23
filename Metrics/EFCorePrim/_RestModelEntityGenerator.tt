@@ -1,0 +1,62 @@
+﻿<#+
+// <copyright file="_RestModelEntityGenerator.tt">
+//  Copyright © ... All Rights Reserved.
+// </copyright>
+
+public class _RestModelEntityGenerator : BaseEntityTemplate
+{
+	private EntityType _entity;
+	private EntityContainer _container;
+	
+	private string _prefix;
+	
+	private string _entityName;	 
+	
+	public void InitGeneratorTemplate(string prefix, EntityType entity, EntityContainer container, CodeGenerationTools code)
+	{
+		_prefix = prefix;
+		_entity = entity;
+		_code = code;
+		_container = container;
+		_entityName = "Rest"+_code.Escape(_entity);
+		
+		this.Output.File = string.Format("Rest\\Generated\\{0}.Generated.cs", _entityName);			
+	}
+
+	public override string TransformText()
+	{
+#>/************************************************************
+*
+*	Entity class generated from <#= _prefix #>Model.edmx
+*
+*************************************************************/
+using System;
+using System.Collections.Generic;
+
+<#+
+		BeginNamespace();
+#>
+
+<#=Accessibility.ForType(_entity)#> <#=_code.SpaceAfter(_code.AbstractOption(_entity))#>partial class <#=_entityName#>
+{
+
+<#+
+
+	    var primitiveProperties = _entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == _entity);
+	    if (primitiveProperties.Any())
+	    {
+	        foreach (var edmProperty in primitiveProperties)
+	        {
+	            WriteProperty(_code, edmProperty);
+	        }
+	    }
+#>
+
+}
+<#+
+    	EndNamespace();
+		return this.GenerationEnvironment.ToString();
+
+	}	
+}
+#>

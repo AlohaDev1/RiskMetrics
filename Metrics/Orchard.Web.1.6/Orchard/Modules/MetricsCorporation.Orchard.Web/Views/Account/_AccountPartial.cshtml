@@ -1,0 +1,326 @@
+﻿<ul class="nav nav-tabs" id="accountTabs">
+    <li class="active"><a href="#details">Subscription Details</a></li>
+    <li><a href="#downloads">Downloads</a></li>
+    
+     <!-- ko if: DisplayAdmin -->
+        <li><a href="#allUsers">All Users</a></li>
+    <!-- /ko -->
+    <!-- ko if: DisplayAdmin -->
+        <li><a href="#allUserChart">All Users (Chart)</a></li>
+    <!-- /ko -->
+    
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="details" style="min-height: 350px;" data-bind="with: subscribtion">
+        <div class="row">
+            <div class="span5" style="margin-right: 100px;">
+                <table class="table table-bordered table-hover ">
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            <span data-bind="text: Name"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            User Name
+                        </td>
+                        <td>
+                            <span data-bind="text: UserName"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Company name
+                        </td>
+                        <td>
+                            <span data-bind="text: CompanyName"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            States
+                        </td>
+                        <td>
+                            <span data-bind="text: States"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Subscription Expires on
+                        </td>
+                        <td>
+                            <span data-bind="text: ExpirationDate"></span>
+                        </td>
+                    </tr>
+                </table>
+                <a data-bind="visible: DisplayLinkedInLink()" href="/MetricsCorporation.Orchard.Web/Account/AddLinkedInAccount">Add LinkedIn Account</a>
+                <span data-bind="visible: !DisplayLinkedInLink()">You already have LinkedIn account</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;        <a data-bind="visible: !DisplayLinkedInLink()" href="/MetricsCorporation.Orchard.Web/Account/RemoveLinkedAccount">Remove LinkedIn Account</a>
+
+            </div>
+            <div class="span5">
+                <div class="row">
+                    <table class="table table-bordered table-hover ">
+                        <tr>
+                            <td>
+                                Report Views Allowed
+                            </td>
+                            <td>
+                                <span data-bind="text: MaxReportViewsPerMonth"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Reports Viewed
+                            </td>
+                            <td>
+                                <span data-bind="text: ReportsViewed"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Reports View Left
+                            </td>
+                            <td>
+                                <span data-bind="text: ReportsViewLeft"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row">
+                    <table class="table table-bordered table-hover ">
+                        <tr>
+                            <td>
+                                Allowed to export records
+                            </td>
+                            <td>
+                                <span data-bind="text: CanexportList"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Number of Records you can export
+                            </td>
+                            <td>
+                                <span data-bind="text: MaxExports"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Records Exported
+                            </td>
+                            <td>
+                                <span data-bind="text: RecordsExported"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Records Export Left
+                            </td>
+                            <td>
+                                <span data-bind="text: ReportsExportedLeft"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tab-pane" id="downloads">
+        <p>
+            <h4 style="text-align: center;">
+                Downloads in the last 30 days (Click on the filename to Download the file)</h4>
+        </p>
+        <table class="table table-bordered table-hover ">
+            <thead>
+                <tr>
+                    <th>
+                        Exported on
+                    </th>
+                    <th>
+                        Number of Records Exported
+                    </th>
+                    <th>
+                        Export Type
+                    </th>
+                    <th>
+                        File Type (CSV)
+                    </th>
+                    <th>
+                        File Type (XML)
+                    </th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: exported">
+                <tr>
+                    <td data-bind="html: ExportedOn">
+                    </td>
+                    <td data-bind="html: RecordsExportedCount">
+                    </td>
+                    <td data-bind="html: ExportType">
+                    </td>
+                    <td>
+                        <a href="" class="csv" target="_blank" data-bind="attr:{ href: CsvFileUrl }, text: CsvFileName">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="xml" target="_blank" data-bind="attr:{ href: XmlFileUrl }, text: XmlFileName">
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- ko if: DisplayAdmin -->
+    <div class="tab-pane" id="allUsers">
+        <table class="table table-bordered table-hover ">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        UserName
+                    </th>
+                    <th>
+                        Subscription Status
+                    </th>
+                    <th>
+                        Number of Logins
+                    </th>
+                    <th>
+                        Last Login Date
+                    </th>
+                    <th>
+                        Total Reports Viewed
+                    </th>
+                    <th>
+                        Total Records Downloaded
+                    </th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: users">
+                <tr>
+                    <td>
+                        <span data-bind="text: Name"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: UserName"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: SubscriptionStatus"></span>
+                    </td>
+                    <td>
+                        <span class="link" data-bind="click: viewLogins, text: LoginCount"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: LastLoginFormatted"></span>
+                    </td>
+                    <td>
+                        <span class="link" data-bind="click: viewReports, text: TotalReportsViewed"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: TotalReportsExported"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: DisplayAdmin -->
+    <div class="tab-pane" id="allUserChart">
+        <div id="allUserChartGoogle" style="width: 900px; height: 500px; min-height: 500px;
+                                                                                                                   min-width: 500px">
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+<div id="loginCountDialog" class="modal hide fade " style="text-align: center; width: 500px;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;</button>
+        <h3>
+            Logins by <span data-bind="text: currentViewUserName"></span></h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <td>
+                            Login Date
+                        </td>
+                        <td>
+                            Number Of Times Logged In
+                        </td>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: currentNumberOfLogins">
+                    <tr>
+                        <td>
+                            <span data-bind="text: LoginDateFormat"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text: Count"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </p>
+    </div>
+    <div class="modal-footer" style="text-align: center">
+        <button class="btn btn-large" data-dismiss="modal" aria-hidden="true">
+            Close</button>
+    </div>
+</div>
+<div id="reportsViewsDialog" class="modal hide fade " style="text-align: center;
+    width: 900px; margin-left: -450px;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;</button>
+        <h3>
+            Report views by <span data-bind="text: currentViewUserName"></span> </h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            <table class="table table-bordered table-hover" style="min-width: 600px;">
+                <thead>
+                    <tr>
+                        <td>
+                            Report Viewed Date and Time
+                        </td>
+                        <td>
+                            Company Name and Adress
+                        </td>
+                        <td>
+                            Additional Information
+                        </td>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: currentTotalReportsViewed">
+                    <tr>
+                        <td>
+                            <span data-bind="text: reportDateFormatted"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text: CompanyNameAndAdress"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text: AdditionalInformation"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="paginationReports"></div>
+        </p>
+    </div>
+    <div class="modal-footer" style="text-align: center">
+        <button class="btn btn-large" data-dismiss="modal" aria-hidden="true">
+            Close</button>
+    </div>
+</div>

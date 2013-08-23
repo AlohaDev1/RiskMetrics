@@ -1,0 +1,53 @@
+﻿<#+
+// <copyright file="_RepositoryGenerator.tt">
+//  Copyright © ... All Rights Reserved.
+// </copyright>
+
+public class _RepositoryGenerator : BaseTemplate
+{
+	private EntityType _entity;
+	private EntityContainer _container;
+		
+	private string _entityName;	 
+	
+	public void InitGeneratorTemplate(EntityType entity, EntityContainer container, CodeGenerationTools code)
+	{
+		_entity = entity;
+		_code = code;
+		_container = container;
+		_entityName = _code.Escape(_entity);
+		
+		_namespaceName = "MetricsCorporation.EFCore.Repository";
+		
+		this.Output.File = string.Format("Repository\\Generated\\{0}Repository.Generated.cs", _entityName);			
+	}
+
+	public override string TransformText()
+	{
+#>/************************************************************
+*
+*	Repository module generated from MetricsCorporationModel.edmx
+*
+*************************************************************/
+using System;
+using System.Linq;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Objects;
+using MetricsCorporation.Entities;
+
+<#+
+		BeginNamespace();
+#>
+
+public partial class <#= _code.Escape(_entity)#>Repository : GenericRepository<<#= _code.Escape(_entity)#>>
+{
+	public <#= _code.Escape(_entity)#>Repository(state_schematicEntities context) : base(context)
+	{}
+}
+<#+
+		EndNamespace();
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

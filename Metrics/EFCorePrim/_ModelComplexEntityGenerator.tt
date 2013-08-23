@@ -1,0 +1,93 @@
+﻿<#+
+// <copyright file="_ModelComplexEntityGenerator.tt.tt">
+//  Copyright © ... All Rights Reserved.
+// </copyright>
+
+public class _ModelComplexEntityGenerator : BaseEntityTemplate
+{
+	private ComplexType _entity;
+	private EntityContainer _container;
+	
+	private string _prefix;
+	
+	private string _entityName;	 
+	
+	public void InitGeneratorTemplate(string prefix, ComplexType entity, EntityContainer container, CodeGenerationTools code)
+	{
+		_prefix = prefix;
+		_entity = entity;
+		_code = code;
+		_container = container;
+		_entityName = _code.Escape(_entity);
+		
+		this.Output.File = string.Format("Generated\\{0}.Generated.cs", _entityName);			
+	}
+
+	public override string TransformText()
+	{
+#>/************************************************************
+*
+*	Entity class generated from <#= _prefix #>Model.edmx
+*
+*************************************************************/
+using System;
+
+<#=Accessibility.ForType(_entity)#> partial class <#=_code.Escape(_entity)#>
+{
+<#+
+    var complexProperties = _entity.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == _entity);
+    var propertiesWithDefaultValues = _entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == _entity && p.DefaultValue != null);
+
+    if (propertiesWithDefaultValues.Any() || complexProperties.Any())
+    {
+#>
+    public <#=_code.Escape(_entity)#>()
+    {
+<#+
+        foreach (var edmProperty in propertiesWithDefaultValues)
+        {
+#>
+        this.<#=_code.Escape(edmProperty)#> = <#=_code.CreateLiteral(edmProperty.DefaultValue)#>;
+<#+
+        }
+
+        foreach (var complexProperty in complexProperties)
+        {
+#>
+        this.<#=_code.Escape(complexProperty)#> = new <#=_code.Escape(complexProperty.TypeUsage)#>();
+<#+
+        }
+#>
+    }
+
+<#+
+    }
+
+    var primitiveProperties = _entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == _entity);
+    if (primitiveProperties.Any())
+    {
+        foreach(var edmProperty in primitiveProperties)
+        {
+            WriteProperty(_code, edmProperty);
+        }
+    }
+
+    if (complexProperties.Any())
+    {
+#>
+
+<#+
+        foreach(var edmProperty in complexProperties)
+        {
+            WriteProperty(_code, edmProperty);
+        }
+    }
+#>
+}
+<#+
+    	EndNamespace();
+		return this.GenerationEnvironment.ToString();
+
+	}
+}
+#>

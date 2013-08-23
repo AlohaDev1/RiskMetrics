@@ -1,0 +1,3 @@
+﻿Generated model file: MetricsCorporationModel.edmx.
+Loading metadata from the database took 00:00:00.5009486.
+Generating the model took 00:00:00.5973326.

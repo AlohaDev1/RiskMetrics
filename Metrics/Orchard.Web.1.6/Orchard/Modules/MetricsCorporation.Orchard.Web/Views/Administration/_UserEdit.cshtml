@@ -1,0 +1,203 @@
+﻿@model MetricsCorporation.Models.UserModel
+
+
+<div id="userEditDialog" class="modal hide fade " style="text-align: center; " data-bind="with: selectedUser">
+    <div class="modal-header" style="border-bottom: none;">
+        
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;</button>
+        <h3>Add/Edit user</h3>
+        <div class="form-actions" style="margin-top: 20px;">
+            <button type="button" data-bind="click: $parent.backToList, visible: isEditMode()" class="btn" >Cancel</button>
+            <button type="button" data-bind="click: $parent.saveItem, visible: isEditMode()" class="btn" >Save</button>
+            @*<button type="button" data-bind="click: $parent.beginAddItem, visible: !isEditMode()" class="btn" >Add</button>*@
+            <button type="button" data-bind="click: $parent.beginEditItem, visible: !isEditMode()" class="btn" >Edit</button>
+            <button type="button" data-bind="click: $parent.beginCopyItem, visible: !isEditMode()" class="btn" >Copy</button>
+            <button type="button" data-bind="click: $parent.deleteItem, visible: !isEditMode()" class="btn" >Delete</button>
+        </div>
+    </div>
+    <div class="modal-body" style="padding-top: 0px;">
+        
+        <div class="span5">
+            <table class="table table-hover" >
+                <tr data-bind="visible: !isEditMode()">
+                    <td>@Html.DisplayNameFor(model => model.Id):
+                    </td>
+                    <td>
+                        <span data-bind="text: Id"></span>
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Email):
+                    </td>
+                    <td>
+                        <span data-bind="text: Email, visible: !isEditMode()"></span>
+                        <input type="email" data-bind="value: Email, visible: isEditMode()" />
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Password:
+                    </td>
+                    <td>
+                        <span data-bind="text: Password, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="value: Password, visible: isEditMode()" />
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Roles</td>
+                    <td>
+                        <ul data-bind="foreach: $parent.roles" class="roles">
+                            <li>
+                                <input type="checkbox" data-bind="checked: Checked, enable: $parent.isEditMode()" />
+                                <label data-bind="text: Name"></label>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>First Name:
+                    </td>
+                    <td>
+                        <span data-bind="text: FirstName, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="value: FirstName, visible: isEditMode()" />
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Last Name:
+                    </td>
+                    <td>
+                        <span data-bind="text: LastName, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="value: LastName, visible: isEditMode()" />
+                    </td>
+                </tr>
+          
+                <tr>
+                    <td>States:
+                    </td>
+                    <td>
+                        <span data-bind="text: States, visible: !isEditMode()"></span>
+                        <div data-bind="visible: isEditMode()">
+                            <input type="text" data-bind="kendoAutoComplete: { dataTextField: 'name', dataValueField: 'id', data: $parent.StatesCollection, value: States, separator: ',' }" style="width: 220px" />    
+                        </div>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>Activation Date:
+                    </td>
+                    <td>
+                        <span data-bind="text: ActivationDate, visible: !isEditMode()"></span>
+                        <input type="datetime" data-bind="value: ActivationDate, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Expiration Date:
+                    </td>
+                    <td>
+                        <span data-bind="text: ExpirationDate, visible: !isEditMode()"></span>
+                        <input type="datetime" data-bind="value: ExpirationDate, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Company Name:
+                    </td>
+                    <td>
+                        <span data-bind="text: CompanyName, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="value: CompanyName, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Admin:
+                    </td>
+                    <td>
+                        <input type="checkbox" data-bind="checked: Admin, enable: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Can export list:
+                    </td>
+                    <td>
+                        <input type="checkbox" data-bind="checked: CanexportList, enable: isEditMode()" />
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td>Max Report Views :
+                    </td>
+                    <td>
+                        Active mode: <span data-bind="text: activeReportsModeDisplay, visible: !isEditMode()"></span>
+                        <span data-bind="visible: isEditMode()">
+                            By Month<input style="margin: 0px 10px 3px 5px;" type="radio" name="MaxReportViewsPerMonth" value="true" data-bind="checked: ReportsViewByMonth" />
+                            By Year<input style="margin: 0px 10px 3px 5px;" type="radio" name="MaxReportViewsPerMonth" value="false" data-bind="checked: ReportsViewByMonth" />
+                        </span><br />
+                        Per Month:<span data-bind="text: MaxReportViewsPerMonth, visible: !isEditMode()"></span>
+                        <input type="number" data-bind="value: MaxReportViewsPerMonth, visible: isEditMode()" />
+                        <br/>
+                        Per Year:
+                        <span data-bind="text: MaxReportViewsPerYear, visible: !isEditMode()"></span>
+                        <input type="number" data-bind="value: MaxReportViewsPerYear, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Max Exports:
+                    </td>
+                    <td>
+                        <span data-bind="text: MaxExports, visible: !isEditMode()"></span>
+                        <input type="number" data-bind="value: MaxExports, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Max Jigsaw Reports Views:
+                    </td>
+                    <td>
+                        Active mode: <span data-bind="text: activeReportsJiqwasModeDisplay, visible: !isEditMode()"></span>
+                        <span data-bind="visible: isEditMode()">
+                            By Month<input style="margin: 0px 10px 3px 5px;" type="radio" name="ReportsJigwasByMonth" value="true" data-bind="checked: ReportsJigwasByMonth" />
+                            By Year<input style="margin: 0px 10px 3px 5px;" type="radio" name="ReportsJigwasByMonth" value="false" data-bind="checked: ReportsJigwasByMonth" />
+                        </span><br />
+                        Per Month:<span data-bind="text: MaxJigsawReportsViewsPerMonth, visible: !isEditMode()"></span>
+                        <input type="number" data-bind="value: MaxJigsawReportsViewsPerMonth, visible: isEditMode()" />
+                        <br/>
+                        Per Year:
+                        <span data-bind="text: MaxJigsawReportsViewsPerYear, visible: !isEditMode()"></span>
+                        <input type="number" data-bind="value: MaxJigsawReportsViewsPerYear, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Max Jigsaw Exports:
+                    </td>
+                    <td>
+                        <span data-bind="text: MaxJigsawExports, visible: !isEditMode()"></span>
+                        <input type="number" data-bind="value: MaxJigsawExports, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Show Carrier:
+                    </td>
+                    <td>
+                        <input type="checkbox" data-bind="checked: ShowCarrier, enable: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Show Status:
+                    </td>
+                    <td>
+                        <input type="checkbox" data-bind="checked: ShowStatusFld, enable: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Test Account:
+                    </td>
+                    <td>
+                        <input type="checkbox" data-bind="checked: TestAccount, enable: isEditMode()" />
+                    </td>
+                </tr>
+               
+            </table>
+        </div>
+    </div>
+ @*   <div class="modal-footer" style="text-align: center">
+        <button class="btn btn-large" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>*@
+</div>

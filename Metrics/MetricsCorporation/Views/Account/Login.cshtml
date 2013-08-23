@@ -1,0 +1,47 @@
+﻿@model MetricsCorporation.Models.LoginModel
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+<section id="loginForm">
+<h2>Use a local account to log in.</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Username)
+                <input id="Username" name="Username" data-bind='value: userName' />
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                <input id="Password" name="Password" type="password" data-bind='value: password' />
+                @Html.ValidationMessage("UserPasswordError")
+            </li>
+            <li>
+                @Html.CheckBoxFor(m => m.Remember)
+                @Html.LabelFor(m => m.Remember, new { @class = "checkbox" })
+            </li>
+        </ol>
+        @Html.ActionLink("Connect to Linked in", "LinkedInConnect", "Account")
+        <input type="submit" data-bind='click: submit' value="Log in" />
+    </fieldset>
+}
+
+</section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout-2.1.0.debug.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout.validation.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ValidationLocal/en-US.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/app/LoginViewModel.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //ko.applyBindings(loginViewModel);
+        });
+    </script>
+}

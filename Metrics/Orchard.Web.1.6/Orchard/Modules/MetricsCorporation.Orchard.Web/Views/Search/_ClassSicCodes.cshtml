@@ -1,0 +1,37 @@
+﻿<div id="ClassSicCodes" class="modal hide fade " style="width: 600px;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" data-bind="click: CloseClassSicCodesDialog">
+            &times;</button>
+        <h3 style="text-align: center;">
+            Update SIC Code & Class Code Selection</h3>
+    </div>
+    <div>
+        <div id="treeViewHolder" style="height: 350px; margin-top: 10px;">
+            <ul class="nav nav-tabs" style="margin-bottom: 0px;">
+                <li><a href="#treeview-Geography-qs" data-toggle="tab">Geogrpahy</a></li>
+                <li class="active"><a href="#treeview-sic-code-p-qs" data-toggle="tab">Sic Codes</a></li>
+                <li><a href="#treeview-class-code-p-qs" data-toggle="tab">Class Codes</a></li>
+            </ul>
+            <div class="tab-content" style="height: 300px; overflow-y: auto">
+                <div class="tab-pane" id="treeview-Geography-qs">
+                    <div id="treeview-Geography-QuickSearch">
+                    </div>
+                </div>
+                <div class="tab-pane active" id="treeview-sic-code-p-qs">
+                    <div id="treeview-sic-code-QuickSearch">
+                    </div>
+                </div>
+                <div class="tab-pane" id="treeview-class-code-p-qs">
+                    <div id="treeview-class-code-QuickSearch">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="text-align: center">
+        <button class="btn btn-large btn-success" data-bind="click: LoadSelectedCriateria">
+            Update Selection</button>
+        <button class="btn btn-large btn-danger" data-bind="click: CloseClassSicCodesDialog">
+            Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MetricsPrimCombModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MetricsPrimCombModelStoreContainer">
+          <EntitySet Name="comb" EntityType="MetricsPrimCombModel.Store.comb" store:Type="Tables" Schema="MO_TestDB_Datalister" />
+          <EntitySet Name="prim" EntityType="MetricsPrimCombModel.Store.prim" store:Type="Tables" Schema="MO_TestDB_Datalister" />
+        </EntityContainer>
+        <EntityType Name="comb">
+          <Key>
+            <PropertyRef Name="UniqueID" />
+          </Key>
+          <Property Name="UniqueID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MasterUID" Type="varchar" MaxLength="15" />
+          <Property Name="DUNS_ULT" Type="char" MaxLength="9" />
+          <Property Name="DUNS_Loc" Type="char" MaxLength="9" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="MailingAddress" Type="varchar" MaxLength="255" />
+          <Property Name="MailingAddressCity" Type="varchar" MaxLength="100" />
+          <Property Name="MailingAddressState" Type="char" MaxLength="2" />
+          <Property Name="MailingAddressZip" Type="varchar" MaxLength="7" />
+          <Property Name="MailingAddressZip4" Type="char" MaxLength="4" />
+          <Property Name="PhysicalAddress" Type="varchar" MaxLength="255" />
+          <Property Name="PhysicalAddressCity" Type="varchar" MaxLength="100" />
+          <Property Name="PhysicalAddressState" Type="char" MaxLength="2" />
+          <Property Name="PhysicalAddressZip" Type="varchar" MaxLength="7" />
+          <Property Name="PhysicalAddressZip4" Type="char" MaxLength="4" />
+          <Property Name="PhoneEmp" Type="varchar" MaxLength="25" />
+          <Property Name="FEIN" Type="varchar" MaxLength="15" />
+          <Property Name="CountyNum" Type="char" MaxLength="5" />
+          <Property Name="RecordType" Type="char" MaxLength="1" />
+          <Property Name="ReportingState" Type="char" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="prim">
+          <Key>
+            <PropertyRef Name="MasterUID" />
+          </Key>
+          <Property Name="MasterUID" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="DUNS_ULT" Type="char" MaxLength="9" />
+          <Property Name="DUNS_Loc" Type="char" MaxLength="9" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="MailingAddress" Type="varchar" MaxLength="255" />
+          <Property Name="MailingAddressCity" Type="varchar" MaxLength="100" />
+          <Property Name="MailingAddressState" Type="char" MaxLength="2" />
+          <Property Name="MailingAddressZip" Type="varchar" MaxLength="7" />
+          <Property Name="MailingAddressZip4" Type="char" MaxLength="4" />
+          <Property Name="PhysicalAddress" Type="varchar" MaxLength="255" />
+          <Property Name="PhysicalAddressCity" Type="varchar" MaxLength="100" />
+          <Property Name="PhysicalAddressState" Type="char" MaxLength="2" />
+          <Property Name="PhysicalAddressZip" Type="varchar" MaxLength="7" />
+          <Property Name="PhysicalAddressZip4" Type="char" MaxLength="4" />
+          <Property Name="PhoneEmp" Type="varchar" MaxLength="25" />
+          <Property Name="ClassCode" Type="varchar" MaxLength="75" />
+          <Property Name="SICCode" Type="char" MaxLength="4" />
+          <Property Name="SICCode2" Type="char" MaxLength="2" />
+          <Property Name="EmployeeSizeRange" Type="char" MaxLength="10" />
+          <Property Name="EffectiveDate" Type="char" MaxLength="5" />
+          <Property Name="EffectiveMonth" Type="char" MaxLength="2" />
+          <Property Name="FEIN" Type="varchar" MaxLength="15" />
+          <Property Name="DUNSConfidenceCode" Type="char" MaxLength="2" />
+          <Property Name="PolicySelf" Type="varchar" MaxLength="100" />
+          <Property Name="CountyNum" Type="char" MaxLength="5" />
+          <Property Name="StateNum" Type="char" MaxLength="2" />
+          <Property Name="CountyName" Type="varchar" MaxLength="100" />
+          <Property Name="ContactName" Type="varchar" MaxLength="255" />
+          <Property Name="NAICCarrierName" Type="varchar" MaxLength="255" />
+          <Property Name="NAICGroupName" Type="varchar" MaxLength="255" />
+          <Property Name="ReportingState" Type="char" MaxLength="2" />
+          <Property Name="CurrentOwnerName" Type="varchar" MaxLength="255" />
+          <Property Name="CurrentOwnerAddress" Type="varchar" MaxLength="255" />
+          <Property Name="CurrentOwnerCity" Type="varchar" MaxLength="100" />
+          <Property Name="CurrentOwnerState" Type="char" MaxLength="2" />
+          <Property Name="CurrentOwnerZip" Type="varchar" MaxLength="7" />
+          <Property Name="CurrentOwnerZip4" Type="char" MaxLength="4" />
+          <Property Name="CurrentOwnerCareOf" Type="varchar" MaxLength="255" />
+          <Property Name="TotalAssessedValue" Type="varchar" MaxLength="255" />
+          <Property Name="AssessedImprovementValue" Type="varchar" MaxLength="255" />
+          <Property Name="AssessedLandValue" Type="varchar" MaxLength="255" />
+          <Property Name="AssessmentYear" Type="varchar" MaxLength="255" />
+          <Property Name="RecordingDateAssessment" Type="varchar" MaxLength="255" />
+          <Property Name="TotalMarketValue" Type="varchar" MaxLength="255" />
+          <Property Name="MarketValueImprovement" Type="varchar" MaxLength="255" />
+          <Property Name="MarketValueLand" Type="varchar" MaxLength="255" />
+          <Property Name="MarketValueYear" Type="varchar" MaxLength="255" />
+          <Property Name="OriginalContractDate" Type="varchar" MaxLength="255" />
+          <Property Name="SalesPrice" Type="varchar" MaxLength="255" />
+          <Property Name="YearBuilt" Type="varchar" MaxLength="255" />
+          <Property Name="Zoning" Type="varchar" MaxLength="255" />
+          <Property Name="OriginalLotSize" Type="varchar" MaxLength="255" />
+          <Property Name="BuildingArea" Type="varchar" MaxLength="255" />
+          <Property Name="NoOfBuildings" Type="varchar" MaxLength="255" />
+          <Property Name="NoOfStories" Type="varchar" MaxLength="255" />
+          <Property Name="Pool" Type="varchar" MaxLength="255" />
+          <Property Name="Elevator" Type="varchar" MaxLength="255" />
+          <Property Name="Car_Fleet" Type="varchar" MaxLength="255" />
+          <Property Name="Truck_Fleet" Type="varchar" MaxLength="255" />
+          <Property Name="Total_Fleet" Type="varchar" MaxLength="255" />
+          <Property Name="Entry_Level_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Basic_Economy_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Lower_Middle_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Upper_Middle_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Upper_Middle_Specialty_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Traditional_Large_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Basic_Sporty_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Mid_Sporty_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Prestige_Sporty_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Basic_Luxury_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Mid_Luxury_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Prestige_Luxury_Car" Type="varchar" MaxLength="255" />
+          <Property Name="Heavy_Duty_Station_Wagon" Type="varchar" MaxLength="255" />
+          <Property Name="Minivan_Cargo" Type="varchar" MaxLength="255" />
+          <Property Name="Minivan_Passenger" Type="varchar" MaxLength="255" />
+          <Property Name="Window_Van_Passenger" Type="varchar" MaxLength="255" />
+          <Property Name="Mini_Sport_Utility" Type="varchar" MaxLength="255" />
+          <Property Name="Sport_Utility" Type="varchar" MaxLength="255" />
+          <Property Name="Fullsize_Utility" Type="varchar" MaxLength="255" />
+          <Property Name="Luxury_Pickup" Type="varchar" MaxLength="255" />
+          <Property Name="Compact_Pickup" Type="varchar" MaxLength="255" />
+          <Property Name="Midsize_Pickup" Type="varchar" MaxLength="255" />
+          <Property Name="Fullsize_Pickup" Type="varchar" MaxLength="255" />
+          <Property Name="Fullsize_Van_Cargo" Type="varchar" MaxLength="255" />
+          <Property Name="Ambulance" Type="varchar" MaxLength="255" />
+          <Property Name="Bus" Type="varchar" MaxLength="255" />
+          <Property Name="Car_Carrier" Type="varchar" MaxLength="255" />
+          <Property Name="Camper_Motor_Driven" Type="varchar" MaxLength="255" />
+          <Property Name="Cab_Chassis" Type="varchar" MaxLength="255" />
+          <Property Name="Cutaway_Van" Type="varchar" MaxLength="255" />
+          <Property Name="Dump_Truck" Type="varchar" MaxLength="255" />
+          <Property Name="Flat_Bed" Type="varchar" MaxLength="255" />
+          <Property Name="Log_Carrier" Type="varchar" MaxLength="255" />
+          <Property Name="Motorhome" Type="varchar" MaxLength="255" />
+          <Property Name="Panel_Truck" Type="varchar" MaxLength="255" />
+          <Property Name="Pickup_Camper" Type="varchar" MaxLength="255" />
+          <Property Name="Refrigerator_Truck" Type="varchar" MaxLength="255" />
+          <Property Name="Sedan_Delivery" Type="varchar" MaxLength="255" />
+          <Property Name="Stake_Truck" Type="varchar" MaxLength="255" />
+          <Property Name="Station_Wagon_Truck" Type="varchar" MaxLength="255" />
+          <Property Name="Tank_Truck" Type="varchar" MaxLength="255" />
+          <Property Name="Transit_Mixer" Type="varchar" MaxLength="255" />
+          <Property Name="Tractor_Truck" Type="varchar" MaxLength="255" />
+          <Property Name="Step_Van" Type="varchar" MaxLength="255" />
+          <Property Name="Van_Camper" Type="varchar" MaxLength="255" />
+          <Property Name="Wrecker" Type="varchar" MaxLength="255" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MetricsPrimCombModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MetricsPrimCombModelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="combs" EntityType="MetricsPrimCombModel.comb" />
+          <EntitySet Name="prims" EntityType="MetricsPrimCombModel.prim" />
+        </EntityContainer>
+        <EntityType Name="comb">
+          <Key>
+            <PropertyRef Name="UniqueID" />
+          </Key>
+          <Property Name="UniqueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterUID" Type="String" />
+          <Property Name="DUNS_ULT" Type="String" />
+          <Property Name="DUNS_Loc" Type="String" />
+          <Property Name="Description" Type="String" />
+          <Property Name="MailingAddress" Type="String" />
+          <Property Name="MailingAddressCity" Type="String" />
+          <Property Name="MailingAddressState" Type="String" />
+          <Property Name="MailingAddressZip" Type="String" />
+          <Property Name="MailingAddressZip4" Type="String" />
+          <Property Name="PhysicalAddress" Type="String" />
+          <Property Name="PhysicalAddressCity" Type="String" />
+          <Property Name="PhysicalAddressState" Type="String" />
+          <Property Name="PhysicalAddressZip" Type="String" />
+          <Property Name="PhysicalAddressZip4" Type="String" />
+          <Property Name="PhoneEmp" Type="String" />
+          <Property Name="FEIN" Type="String" />
+          <Property Name="CountyNum" Type="String" />
+          <Property Name="RecordType" Type="String" />
+          <Property Name="ReportingState" Type="String" />
+        </EntityType>
+        <EntityType Name="prim">
+          <Key>
+            <PropertyRef Name="MasterUID" />
+          </Key>
+          <Property Name="MasterUID" Type="String" Nullable="false" />
+          <Property Name="DUNS_ULT" Type="String" />
+          <Property Name="DUNS_Loc" Type="String" />
+          <Property Name="Description" Type="String" />
+          <Property Name="MailingAddress" Type="String" />
+          <Property Name="MailingAddressCity" Type="String" />
+          <Property Name="MailingAddressState" Type="String" />
+          <Property Name="MailingAddressZip" Type="String" />
+          <Property Name="MailingAddressZip4" Type="String" />
+          <Property Name="PhysicalAddress" Type="String" />
+          <Property Name="PhysicalAddressCity" Type="String" />
+          <Property Name="PhysicalAddressState" Type="String" />
+          <Property Name="PhysicalAddressZip" Type="String" />
+          <Property Name="PhysicalAddressZip4" Type="String" />
+          <Property Name="PhoneEmp" Type="String" />
+          <Property Name="ClassCode" Type="String" />
+          <Property Name="SICCode" Type="String" />
+          <Property Name="SICCode2" Type="String" />
+          <Property Name="EmployeeSizeRange" Type="String" />
+          <Property Name="EffectiveDate" Type="String" />
+          <Property Name="EffectiveMonth" Type="String" />
+          <Property Name="FEIN" Type="String" />
+          <Property Name="DUNSConfidenceCode" Type="String" />
+          <Property Name="PolicySelf" Type="String" />
+          <Property Name="CountyNum" Type="String" />
+          <Property Name="StateNum" Type="String" />
+          <Property Name="CountyName" Type="String" />
+          <Property Name="ContactName" Type="String" />
+          <Property Name="NAICCarrierName" Type="String" />
+          <Property Name="NAICGroupName" Type="String" />
+          <Property Name="ReportingState" Type="String" />
+          <Property Name="CurrentOwnerName" Type="String" />
+          <Property Name="CurrentOwnerAddress" Type="String" />
+          <Property Name="CurrentOwnerCity" Type="String" />
+          <Property Name="CurrentOwnerState" Type="String" />
+          <Property Name="CurrentOwnerZip" Type="String" />
+          <Property Name="CurrentOwnerZip4" Type="String" />
+          <Property Name="CurrentOwnerCareOf" Type="String" />
+          <Property Name="TotalAssessedValue" Type="String" />
+          <Property Name="AssessedImprovementValue" Type="String" />
+          <Property Name="AssessedLandValue" Type="String" />
+          <Property Name="AssessmentYear" Type="String" />
+          <Property Name="RecordingDateAssessment" Type="String" />
+          <Property Name="TotalMarketValue" Type="String" />
+          <Property Name="MarketValueImprovement" Type="String" />
+          <Property Name="MarketValueLand" Type="String" />
+          <Property Name="MarketValueYear" Type="String" />
+          <Property Name="OriginalContractDate" Type="String" />
+          <Property Name="SalesPrice" Type="String" />
+          <Property Name="YearBuilt" Type="String" />
+          <Property Name="Zoning" Type="String" />
+          <Property Name="OriginalLotSize" Type="String" />
+          <Property Name="BuildingArea" Type="String" />
+          <Property Name="NoOfBuildings" Type="String" />
+          <Property Name="NoOfStories" Type="String" />
+          <Property Name="Pool" Type="String" />
+          <Property Name="Elevator" Type="String" />
+          <Property Name="Car_Fleet" Type="String" />
+          <Property Name="Truck_Fleet" Type="String" />
+          <Property Name="Total_Fleet" Type="String" />
+          <Property Name="Entry_Level_Car" Type="String" />
+          <Property Name="Basic_Economy_Car" Type="String" />
+          <Property Name="Lower_Middle_Car" Type="String" />
+          <Property Name="Upper_Middle_Car" Type="String" />
+          <Property Name="Upper_Middle_Specialty_Car" Type="String" />
+          <Property Name="Traditional_Large_Car" Type="String" />
+          <Property Name="Basic_Sporty_Car" Type="String" />
+          <Property Name="Mid_Sporty_Car" Type="String" />
+          <Property Name="Prestige_Sporty_Car" Type="String" />
+          <Property Name="Basic_Luxury_Car" Type="String" />
+          <Property Name="Mid_Luxury_Car" Type="String" />
+          <Property Name="Prestige_Luxury_Car" Type="String" />
+          <Property Name="Heavy_Duty_Station_Wagon" Type="String" />
+          <Property Name="Minivan_Cargo" Type="String" />
+          <Property Name="Minivan_Passenger" Type="String" />
+          <Property Name="Window_Van_Passenger" Type="String" />
+          <Property Name="Mini_Sport_Utility" Type="String" />
+          <Property Name="Sport_Utility" Type="String" />
+          <Property Name="Fullsize_Utility" Type="String" />
+          <Property Name="Luxury_Pickup" Type="String" />
+          <Property Name="Compact_Pickup" Type="String" />
+          <Property Name="Midsize_Pickup" Type="String" />
+          <Property Name="Fullsize_Pickup" Type="String" />
+          <Property Name="Fullsize_Van_Cargo" Type="String" />
+          <Property Name="Ambulance" Type="String" />
+          <Property Name="Bus" Type="String" />
+          <Property Name="Car_Carrier" Type="String" />
+          <Property Name="Camper_Motor_Driven" Type="String" />
+          <Property Name="Cab_Chassis" Type="String" />
+          <Property Name="Cutaway_Van" Type="String" />
+          <Property Name="Dump_Truck" Type="String" />
+          <Property Name="Flat_Bed" Type="String" />
+          <Property Name="Log_Carrier" Type="String" />
+          <Property Name="Motorhome" Type="String" />
+          <Property Name="Panel_Truck" Type="String" />
+          <Property Name="Pickup_Camper" Type="String" />
+          <Property Name="Refrigerator_Truck" Type="String" />
+          <Property Name="Sedan_Delivery" Type="String" />
+          <Property Name="Stake_Truck" Type="String" />
+          <Property Name="Station_Wagon_Truck" Type="String" />
+          <Property Name="Tank_Truck" Type="String" />
+          <Property Name="Transit_Mixer" Type="String" />
+          <Property Name="Tractor_Truck" Type="String" />
+          <Property Name="Step_Van" Type="String" />
+          <Property Name="Van_Camper" Type="String" />
+          <Property Name="Wrecker" Type="String" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MetricsPrimCombModelStoreContainer" CdmEntityContainer="MetricsPrimCombModelEntities">
+          <EntitySetMapping Name="combs"><EntityTypeMapping TypeName="MetricsPrimCombModel.comb"><MappingFragment StoreEntitySet="comb">
+            <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
+            <ScalarProperty Name="MasterUID" ColumnName="MasterUID" />
+            <ScalarProperty Name="DUNS_ULT" ColumnName="DUNS_ULT" />
+            <ScalarProperty Name="DUNS_Loc" ColumnName="DUNS_Loc" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="MailingAddress" ColumnName="MailingAddress" />
+            <ScalarProperty Name="MailingAddressCity" ColumnName="MailingAddressCity" />
+            <ScalarProperty Name="MailingAddressState" ColumnName="MailingAddressState" />
+            <ScalarProperty Name="MailingAddressZip" ColumnName="MailingAddressZip" />
+            <ScalarProperty Name="MailingAddressZip4" ColumnName="MailingAddressZip4" />
+            <ScalarProperty Name="PhysicalAddress" ColumnName="PhysicalAddress" />
+            <ScalarProperty Name="PhysicalAddressCity" ColumnName="PhysicalAddressCity" />
+            <ScalarProperty Name="PhysicalAddressState" ColumnName="PhysicalAddressState" />
+            <ScalarProperty Name="PhysicalAddressZip" ColumnName="PhysicalAddressZip" />
+            <ScalarProperty Name="PhysicalAddressZip4" ColumnName="PhysicalAddressZip4" />
+            <ScalarProperty Name="PhoneEmp" ColumnName="PhoneEmp" />
+            <ScalarProperty Name="FEIN" ColumnName="FEIN" />
+            <ScalarProperty Name="CountyNum" ColumnName="CountyNum" />
+            <ScalarProperty Name="RecordType" ColumnName="RecordType" />
+            <ScalarProperty Name="ReportingState" ColumnName="ReportingState" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="prims"><EntityTypeMapping TypeName="MetricsPrimCombModel.prim"><MappingFragment StoreEntitySet="prim">
+            <ScalarProperty Name="MasterUID" ColumnName="MasterUID" />
+            <ScalarProperty Name="DUNS_ULT" ColumnName="DUNS_ULT" />
+            <ScalarProperty Name="DUNS_Loc" ColumnName="DUNS_Loc" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="MailingAddress" ColumnName="MailingAddress" />
+            <ScalarProperty Name="MailingAddressCity" ColumnName="MailingAddressCity" />
+            <ScalarProperty Name="MailingAddressState" ColumnName="MailingAddressState" />
+            <ScalarProperty Name="MailingAddressZip" ColumnName="MailingAddressZip" />
+            <ScalarProperty Name="MailingAddressZip4" ColumnName="MailingAddressZip4" />
+            <ScalarProperty Name="PhysicalAddress" ColumnName="PhysicalAddress" />
+            <ScalarProperty Name="PhysicalAddressCity" ColumnName="PhysicalAddressCity" />
+            <ScalarProperty Name="PhysicalAddressState" ColumnName="PhysicalAddressState" />
+            <ScalarProperty Name="PhysicalAddressZip" ColumnName="PhysicalAddressZip" />
+            <ScalarProperty Name="PhysicalAddressZip4" ColumnName="PhysicalAddressZip4" />
+            <ScalarProperty Name="PhoneEmp" ColumnName="PhoneEmp" />
+            <ScalarProperty Name="ClassCode" ColumnName="ClassCode" />
+            <ScalarProperty Name="SICCode" ColumnName="SICCode" />
+            <ScalarProperty Name="SICCode2" ColumnName="SICCode2" />
+            <ScalarProperty Name="EmployeeSizeRange" ColumnName="EmployeeSizeRange" />
+            <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+            <ScalarProperty Name="EffectiveMonth" ColumnName="EffectiveMonth" />
+            <ScalarProperty Name="FEIN" ColumnName="FEIN" />
+            <ScalarProperty Name="DUNSConfidenceCode" ColumnName="DUNSConfidenceCode" />
+            <ScalarProperty Name="PolicySelf" ColumnName="PolicySelf" />
+            <ScalarProperty Name="CountyNum" ColumnName="CountyNum" />
+            <ScalarProperty Name="StateNum" ColumnName="StateNum" />
+            <ScalarProperty Name="CountyName" ColumnName="CountyName" />
+            <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+            <ScalarProperty Name="NAICCarrierName" ColumnName="NAICCarrierName" />
+            <ScalarProperty Name="NAICGroupName" ColumnName="NAICGroupName" />
+            <ScalarProperty Name="ReportingState" ColumnName="ReportingState" />
+            <ScalarProperty Name="CurrentOwnerName" ColumnName="CurrentOwnerName" />
+            <ScalarProperty Name="CurrentOwnerAddress" ColumnName="CurrentOwnerAddress" />
+            <ScalarProperty Name="CurrentOwnerCity" ColumnName="CurrentOwnerCity" />
+            <ScalarProperty Name="CurrentOwnerState" ColumnName="CurrentOwnerState" />
+            <ScalarProperty Name="CurrentOwnerZip" ColumnName="CurrentOwnerZip" />
+            <ScalarProperty Name="CurrentOwnerZip4" ColumnName="CurrentOwnerZip4" />
+            <ScalarProperty Name="CurrentOwnerCareOf" ColumnName="CurrentOwnerCareOf" />
+            <ScalarProperty Name="TotalAssessedValue" ColumnName="TotalAssessedValue" />
+            <ScalarProperty Name="AssessedImprovementValue" ColumnName="AssessedImprovementValue" />
+            <ScalarProperty Name="AssessedLandValue" ColumnName="AssessedLandValue" />
+            <ScalarProperty Name="AssessmentYear" ColumnName="AssessmentYear" />
+            <ScalarProperty Name="RecordingDateAssessment" ColumnName="RecordingDateAssessment" />
+            <ScalarProperty Name="TotalMarketValue" ColumnName="TotalMarketValue" />
+            <ScalarProperty Name="MarketValueImprovement" ColumnName="MarketValueImprovement" />
+            <ScalarProperty Name="MarketValueLand" ColumnName="MarketValueLand" />
+            <ScalarProperty Name="MarketValueYear" ColumnName="MarketValueYear" />
+            <ScalarProperty Name="OriginalContractDate" ColumnName="OriginalContractDate" />
+            <ScalarProperty Name="SalesPrice" ColumnName="SalesPrice" />
+            <ScalarProperty Name="YearBuilt" ColumnName="YearBuilt" />
+            <ScalarProperty Name="Zoning" ColumnName="Zoning" />
+            <ScalarProperty Name="OriginalLotSize" ColumnName="OriginalLotSize" />
+            <ScalarProperty Name="BuildingArea" ColumnName="BuildingArea" />
+            <ScalarProperty Name="NoOfBuildings" ColumnName="NoOfBuildings" />
+            <ScalarProperty Name="NoOfStories" ColumnName="NoOfStories" />
+            <ScalarProperty Name="Pool" ColumnName="Pool" />
+            <ScalarProperty Name="Elevator" ColumnName="Elevator" />
+            <ScalarProperty Name="Car_Fleet" ColumnName="Car_Fleet" />
+            <ScalarProperty Name="Truck_Fleet" ColumnName="Truck_Fleet" />
+            <ScalarProperty Name="Total_Fleet" ColumnName="Total_Fleet" />
+            <ScalarProperty Name="Entry_Level_Car" ColumnName="Entry_Level_Car" />
+            <ScalarProperty Name="Basic_Economy_Car" ColumnName="Basic_Economy_Car" />
+            <ScalarProperty Name="Lower_Middle_Car" ColumnName="Lower_Middle_Car" />
+            <ScalarProperty Name="Upper_Middle_Car" ColumnName="Upper_Middle_Car" />
+            <ScalarProperty Name="Upper_Middle_Specialty_Car" ColumnName="Upper_Middle_Specialty_Car" />
+            <ScalarProperty Name="Traditional_Large_Car" ColumnName="Traditional_Large_Car" />
+            <ScalarProperty Name="Basic_Sporty_Car" ColumnName="Basic_Sporty_Car" />
+            <ScalarProperty Name="Mid_Sporty_Car" ColumnName="Mid_Sporty_Car" />
+            <ScalarProperty Name="Prestige_Sporty_Car" ColumnName="Prestige_Sporty_Car" />
+            <ScalarProperty Name="Basic_Luxury_Car" ColumnName="Basic_Luxury_Car" />
+            <ScalarProperty Name="Mid_Luxury_Car" ColumnName="Mid_Luxury_Car" />
+            <ScalarProperty Name="Prestige_Luxury_Car" ColumnName="Prestige_Luxury_Car" />
+            <ScalarProperty Name="Heavy_Duty_Station_Wagon" ColumnName="Heavy_Duty_Station_Wagon" />
+            <ScalarProperty Name="Minivan_Cargo" ColumnName="Minivan_Cargo" />
+            <ScalarProperty Name="Minivan_Passenger" ColumnName="Minivan_Passenger" />
+            <ScalarProperty Name="Window_Van_Passenger" ColumnName="Window_Van_Passenger" />
+            <ScalarProperty Name="Mini_Sport_Utility" ColumnName="Mini_Sport_Utility" />
+            <ScalarProperty Name="Sport_Utility" ColumnName="Sport_Utility" />
+            <ScalarProperty Name="Fullsize_Utility" ColumnName="Fullsize_Utility" />
+            <ScalarProperty Name="Luxury_Pickup" ColumnName="Luxury_Pickup" />
+            <ScalarProperty Name="Compact_Pickup" ColumnName="Compact_Pickup" />
+            <ScalarProperty Name="Midsize_Pickup" ColumnName="Midsize_Pickup" />
+            <ScalarProperty Name="Fullsize_Pickup" ColumnName="Fullsize_Pickup" />
+            <ScalarProperty Name="Fullsize_Van_Cargo" ColumnName="Fullsize_Van_Cargo" />
+            <ScalarProperty Name="Ambulance" ColumnName="Ambulance" />
+            <ScalarProperty Name="Bus" ColumnName="Bus" />
+            <ScalarProperty Name="Car_Carrier" ColumnName="Car_Carrier" />
+            <ScalarProperty Name="Camper_Motor_Driven" ColumnName="Camper_Motor_Driven" />
+            <ScalarProperty Name="Cab_Chassis" ColumnName="Cab_Chassis" />
+            <ScalarProperty Name="Cutaway_Van" ColumnName="Cutaway_Van" />
+            <ScalarProperty Name="Dump_Truck" ColumnName="Dump_Truck" />
+            <ScalarProperty Name="Flat_Bed" ColumnName="Flat_Bed" />
+            <ScalarProperty Name="Log_Carrier" ColumnName="Log_Carrier" />
+            <ScalarProperty Name="Motorhome" ColumnName="Motorhome" />
+            <ScalarProperty Name="Panel_Truck" ColumnName="Panel_Truck" />
+            <ScalarProperty Name="Pickup_Camper" ColumnName="Pickup_Camper" />
+            <ScalarProperty Name="Refrigerator_Truck" ColumnName="Refrigerator_Truck" />
+            <ScalarProperty Name="Sedan_Delivery" ColumnName="Sedan_Delivery" />
+            <ScalarProperty Name="Stake_Truck" ColumnName="Stake_Truck" />
+            <ScalarProperty Name="Station_Wagon_Truck" ColumnName="Station_Wagon_Truck" />
+            <ScalarProperty Name="Tank_Truck" ColumnName="Tank_Truck" />
+            <ScalarProperty Name="Transit_Mixer" ColumnName="Transit_Mixer" />
+            <ScalarProperty Name="Tractor_Truck" ColumnName="Tractor_Truck" />
+            <ScalarProperty Name="Step_Van" ColumnName="Step_Van" />
+            <ScalarProperty Name="Van_Camper" ColumnName="Van_Camper" />
+            <ScalarProperty Name="Wrecker" ColumnName="Wrecker" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="MetricsPrimCombModel">
+        <EntityTypeShape EntityType="MetricsPrimCombModel.comb" Width="1.5" PointX="0.75" PointY="0.75" Height="4.8648079427083326" IsExpanded="true" />
+        <EntityTypeShape EntityType="MetricsPrimCombModel.prim" Width="1.5" PointX="2.75" PointY="0.75" Height="21.402731119791667" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

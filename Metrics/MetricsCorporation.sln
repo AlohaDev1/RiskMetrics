@@ -1,0 +1,121 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsCorporation", "MetricsCorporation\MetricsCorporation.csproj", "{F17A8195-62C0-41C9-AC18-9539417788DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsCorporation.EFCore", "MetricsCorporation.EFCore\MetricsCorporation.EFCore.csproj", "{C9495E58-B136-4872-9F88-BFB62DB691D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsCorporation.Entities", "MetricsCorporation.Entities\MetricsCorporation.Entities.csproj", "{6926DEA9-D5FE-47DE-BB68-DB413141E364}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsCorporation.Models", "MetricsCorporation.Models\MetricsCorporation.Models.csproj", "{5785E9C6-9280-419E-8EBE-AC3B9C40EDE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsCorporation.Infrastructure", "MetricsCorporation.Infrastructure\MetricsCorporation.Infrastructure.csproj", "{CA1EFA68-CCB1-422A-8F69-EE8823267291}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsCorporationTest", "MetricsCorporationTest\MetricsCorporationTest.csproj", "{E07ED6D4-A5EB-4198-93A5-A16B85AEBA0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{823AD751-DF91-4805-91BD-6B0C7559BE02}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		MetricsCorporation.vsmdi = MetricsCorporation.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsCorporation.BL", "MetricsCorporation.BL\MetricsCorporation.BL.csproj", "{D5E036BA-1325-4EB1-9BF2-835F5339729E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{48B8EB4B-5E31-4349-805A-72AB0C34F546}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsCorporation.Orchard.Api", "Orchard.Web.1.6\Orchard\Modules\MetricsCorporation.Orchard.Api\MetricsCorporation.Orchard.Api.csproj", "{C90CB288-3210-4E45-B089-1C5C2A891817}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsCorporation.Orchard.Web", "Orchard.Web.1.6\Orchard\Modules\MetricsCorporation.Orchard.Web\MetricsCorporation.Orchard.Web.csproj", "{337BD861-7D4C-46EA-AC05-1B31FCEFE17F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsCorporation.EFCorePrim", "EFCorePrim\MetricsCorporation.EFCorePrim.csproj", "{104238FB-AF14-4B26-ACA5-0159B74C3218}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "localhost", "http://localhost:1984", "{3DEC9A5B-76C2-4AED-9F44-50BB93CE4620}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/Orchard"
+		Debug.AspNetCompiler.PhysicalPath = "Orchard.Web.1.6\Orchard\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Orchard\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Orchard"
+		Release.AspNetCompiler.PhysicalPath = "Orchard.Web.1.6\Orchard\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Orchard\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "Orchard.Web.1.6\Orchard\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsCorporation.Data", "MetricsCorporation.Data\MetricsCorporation.Data.csproj", "{95EE808C-0EE6-4D8D-A04A-DD54CFE0CDB8}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MetricsCorporation.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F17A8195-62C0-41C9-AC18-9539417788DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F17A8195-62C0-41C9-AC18-9539417788DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F17A8195-62C0-41C9-AC18-9539417788DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F17A8195-62C0-41C9-AC18-9539417788DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9495E58-B136-4872-9F88-BFB62DB691D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9495E58-B136-4872-9F88-BFB62DB691D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9495E58-B136-4872-9F88-BFB62DB691D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9495E58-B136-4872-9F88-BFB62DB691D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6926DEA9-D5FE-47DE-BB68-DB413141E364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6926DEA9-D5FE-47DE-BB68-DB413141E364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6926DEA9-D5FE-47DE-BB68-DB413141E364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6926DEA9-D5FE-47DE-BB68-DB413141E364}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5785E9C6-9280-419E-8EBE-AC3B9C40EDE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5785E9C6-9280-419E-8EBE-AC3B9C40EDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5785E9C6-9280-419E-8EBE-AC3B9C40EDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5785E9C6-9280-419E-8EBE-AC3B9C40EDE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA1EFA68-CCB1-422A-8F69-EE8823267291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA1EFA68-CCB1-422A-8F69-EE8823267291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA1EFA68-CCB1-422A-8F69-EE8823267291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA1EFA68-CCB1-422A-8F69-EE8823267291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E07ED6D4-A5EB-4198-93A5-A16B85AEBA0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E07ED6D4-A5EB-4198-93A5-A16B85AEBA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5E036BA-1325-4EB1-9BF2-835F5339729E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5E036BA-1325-4EB1-9BF2-835F5339729E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5E036BA-1325-4EB1-9BF2-835F5339729E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5E036BA-1325-4EB1-9BF2-835F5339729E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C90CB288-3210-4E45-B089-1C5C2A891817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C90CB288-3210-4E45-B089-1C5C2A891817}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C90CB288-3210-4E45-B089-1C5C2A891817}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C90CB288-3210-4E45-B089-1C5C2A891817}.Release|Any CPU.Build.0 = Release|Any CPU
+		{337BD861-7D4C-46EA-AC05-1B31FCEFE17F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{337BD861-7D4C-46EA-AC05-1B31FCEFE17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{337BD861-7D4C-46EA-AC05-1B31FCEFE17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{337BD861-7D4C-46EA-AC05-1B31FCEFE17F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{104238FB-AF14-4B26-ACA5-0159B74C3218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{104238FB-AF14-4B26-ACA5-0159B74C3218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{104238FB-AF14-4B26-ACA5-0159B74C3218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{104238FB-AF14-4B26-ACA5-0159B74C3218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DEC9A5B-76C2-4AED-9F44-50BB93CE4620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DEC9A5B-76C2-4AED-9F44-50BB93CE4620}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{95EE808C-0EE6-4D8D-A04A-DD54CFE0CDB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95EE808C-0EE6-4D8D-A04A-DD54CFE0CDB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95EE808C-0EE6-4D8D-A04A-DD54CFE0CDB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95EE808C-0EE6-4D8D-A04A-DD54CFE0CDB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+EndGlobal

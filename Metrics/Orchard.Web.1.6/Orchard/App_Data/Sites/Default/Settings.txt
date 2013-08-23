@@ -1,0 +1,12 @@
+Name: Default
+DataProvider: MySql
+DataConnectionString: server=localhost;User Id=root;password=1111;Persist Security Info=True;database=test
+DataPrefix: null
+RequestUrlHost: null
+RequestUrlPrefix: null
+State: Running
+EncryptionAlgorithm: AES
+EncryptionKey: 7FFB8F05BDF951D528D1F772870E730542FCE7F703B21ADB632C8386B11C0C93
+HashAlgorithm: HMACSHA256
+HashKey: 092A5B35ACF4DAC60E3FE201E014172B3C51604E59E2BC4E637D16BC639F1954EF0904D750513AF40EE1F73099C388C5920D7885517208F6FD53727EFA77B211
+Themes: 

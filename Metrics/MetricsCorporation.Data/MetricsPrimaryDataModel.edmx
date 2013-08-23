@@ -1,0 +1,580 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="Model1StoreContainer">
+          <EntitySet Name="carrier" EntityType="Model1.Store.carrier" store:Type="Tables" Schema="datalister1" />
+          <EntitySet Name="classcodes" EntityType="Model1.Store.classcodes" store:Type="Tables" Schema="datalister1" />
+          <EntitySet Name="contactinformation" EntityType="Model1.Store.contactinformation" store:Type="Tables" Schema="datalister1" />
+          <EntitySet Name="countyinformation" EntityType="Model1.Store.countyinformation" store:Type="Tables" Schema="datalister1" />
+          <EntitySet Name="employeesizecode" EntityType="Model1.Store.employeesizecode" store:Type="Tables" Schema="datalister1" />
+          <EntitySet Name="primarydata" EntityType="Model1.Store.primarydata" store:Type="Tables" Schema="datalister1" />
+          <EntitySet Name="siccodes" EntityType="Model1.Store.siccodes" store:Type="Tables" Schema="datalister1" />
+          <EntitySet Name="statecountycode" EntityType="Model1.Store.statecountycode" store:Type="Tables" Schema="datalister1" />
+          <AssociationSet Name="fk_ContactInformation_PrimaryData" Association="Model1.Store.fk_ContactInformation_PrimaryData">
+            <End Role="primarydata" EntitySet="primarydata" />
+            <End Role="contactinformation" EntitySet="contactinformation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PrimaryData_Carrier" Association="Model1.Store.fk_PrimaryData_Carrier">
+            <End Role="carrier" EntitySet="carrier" />
+            <End Role="primarydata" EntitySet="primarydata" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PrimaryData_CountyInformation" Association="Model1.Store.fk_PrimaryData_CountyInformation">
+            <End Role="countyinformation" EntitySet="countyinformation" />
+            <End Role="primarydata" EntitySet="primarydata" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PrimaryData_EmpSizeCode" Association="Model1.Store.fk_PrimaryData_EmpSizeCode">
+            <End Role="employeesizecode" EntitySet="employeesizecode" />
+            <End Role="primarydata" EntitySet="primarydata" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="carrier">
+          <Key>
+            <PropertyRef Name="naicNumber" />
+          </Key>
+          <Property Name="naicNumber" Type="ubigint" Nullable="false" />
+          <Property Name="naicName" Type="varchar" MaxLength="255" />
+          <Property Name="naicGroupNumber" Type="ubigint" />
+          <Property Name="naicGroupName" Type="varchar" MaxLength="255" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="createdBy" Type="varchar" MaxLength="30" />
+          <Property Name="modifiedDate" Type="datetime" />
+          <Property Name="modifiedBy" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="classcodes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Code" Type="char" Nullable="false" MaxLength="4" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="contactinformation">
+          <Key>
+            <PropertyRef Name="contactInformationId" />
+          </Key>
+          <Property Name="contactInformationId" Type="uint" Nullable="false" />
+          <Property Name="masterUId" Type="ubigint" Nullable="false" />
+          <Property Name="contactName" Type="varchar" MaxLength="100" />
+          <Property Name="title" Type="varchar" MaxLength="100" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="15" />
+          <Property Name="emailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="createdBy" Type="varchar" MaxLength="30" />
+          <Property Name="modifiedDate" Type="datetime" />
+          <Property Name="modifiedBy" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="countyinformation">
+          <Key>
+            <PropertyRef Name="countyCode" />
+          </Key>
+          <Property Name="countyCode" Type="uint" Nullable="false" />
+          <Property Name="countyName" Type="varchar" MaxLength="50" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="createdBy" Type="varchar" MaxLength="30" />
+          <Property Name="modifiedDate" Type="datetime" />
+          <Property Name="modifiedBy" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="employeesizecode">
+          <Key>
+            <PropertyRef Name="empSizeCode" />
+          </Key>
+          <Property Name="empSizeCode" Type="utinyint" Nullable="false" />
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="dnb" Type="varchar" MaxLength="45" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="createdBy" Type="varchar" MaxLength="30" />
+          <Property Name="modifiedDate" Type="datetime" />
+          <Property Name="modifiedBy" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="primarydata">
+          <Key>
+            <PropertyRef Name="masterUId" />
+          </Key>
+          <Property Name="masterUId" Type="ubigint" Nullable="false" />
+          <Property Name="rmId" Type="varchar" MaxLength="9" />
+          <Property Name="recordType" Type="utinyint" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+          <Property Name="address" Type="varchar" MaxLength="255" />
+          <Property Name="city" Type="varchar" MaxLength="100" />
+          <Property Name="state" Type="char" MaxLength="2" />
+          <Property Name="zip" Type="char" MaxLength="5" />
+          <Property Name="zipExt" Type="char" MaxLength="4" />
+          <Property Name="lat" Type="float" />
+          <Property Name="long" Type="float" />
+          <Property Name="countyCode" Type="uint" />
+          <Property Name="empSizeCode" Type="utinyint" />
+          <Property Name="peoPayRollId" Type="uint" />
+          <Property Name="sicCode" Type="char" MaxLength="4" />
+          <Property Name="classCode" Type="char" MaxLength="4" />
+          <Property Name="naicsCode" Type="varchar" MaxLength="6" />
+          <Property Name="statusCode" Type="char" MaxLength="10" />
+          <Property Name="dunsNumber" Type="char" MaxLength="9" />
+          <Property Name="dunsConfidenceCode" Type="utinyint" />
+          <Property Name="dnbClass" Type="utinyint" />
+          <Property Name="experianID" Type="char" MaxLength="9" />
+          <Property Name="naicNumber" Type="ubigint" />
+          <Property Name="effectiveDate" Type="char" MaxLength="5" />
+          <Property Name="effectiveMonth" Type="char" MaxLength="2" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="createdBy" Type="varchar" MaxLength="30" />
+          <Property Name="modifiedDate" Type="datetime" />
+          <Property Name="modifiedBy" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="siccodes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Division_Letter" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="Division_Name" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="SIC_2_Digit_Code" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="SIC_2_Digit_Code_Name" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="SIC_3_Digit_Code" Type="char" Nullable="false" MaxLength="3" />
+          <Property Name="SIC_3_Digit_Code_Name" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="SIC_4_Digit_Code" Type="char" Nullable="false" MaxLength="4" />
+          <Property Name="SIC_4_Digit_Code_Name" Type="varchar" Nullable="false" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="statecountycode">
+          <Key>
+            <PropertyRef Name="County Number" />
+          </Key>
+          <Property Name="County Number" Type="int" Nullable="false" />
+          <Property Name="County Description" Type="varchar" MaxLength="255" />
+          <Property Name="State Prefix" Type="varchar" MaxLength="255" />
+          <Property Name="State Description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="fk_ContactInformation_PrimaryData">
+          <End Role="primarydata" Type="Model1.Store.primarydata" Multiplicity="1" />
+          <End Role="contactinformation" Type="Model1.Store.contactinformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="primarydata">
+              <PropertyRef Name="masterUId" />
+            </Principal>
+            <Dependent Role="contactinformation">
+              <PropertyRef Name="masterUId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PrimaryData_Carrier">
+          <End Role="carrier" Type="Model1.Store.carrier" Multiplicity="0..1" />
+          <End Role="primarydata" Type="Model1.Store.primarydata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carrier">
+              <PropertyRef Name="naicNumber" />
+            </Principal>
+            <Dependent Role="primarydata">
+              <PropertyRef Name="naicNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PrimaryData_CountyInformation">
+          <End Role="countyinformation" Type="Model1.Store.countyinformation" Multiplicity="0..1" />
+          <End Role="primarydata" Type="Model1.Store.primarydata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="countyinformation">
+              <PropertyRef Name="countyCode" />
+            </Principal>
+            <Dependent Role="primarydata">
+              <PropertyRef Name="countyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PrimaryData_EmpSizeCode">
+          <End Role="employeesizecode" Type="Model1.Store.employeesizecode" Multiplicity="0..1" />
+          <End Role="primarydata" Type="Model1.Store.primarydata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employeesizecode">
+              <PropertyRef Name="empSizeCode" />
+            </Principal>
+            <Dependent Role="primarydata">
+              <PropertyRef Name="empSizeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="MetricsPrimaryDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="MetricsPrimaryDataModelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="carriers" EntityType="MetricsPrimaryDataModel.carrier" />
+          <EntitySet Name="classcodes" EntityType="MetricsPrimaryDataModel.classcode" />
+          <EntitySet Name="contactinformations" EntityType="MetricsPrimaryDataModel.contactinformation" />
+          <EntitySet Name="countyinformations" EntityType="MetricsPrimaryDataModel.countyinformation" />
+          <EntitySet Name="employeesizecodes" EntityType="MetricsPrimaryDataModel.employeesizecode" />
+          <EntitySet Name="primarydatas" EntityType="MetricsPrimaryDataModel.primarydata" />
+          <EntitySet Name="siccodes" EntityType="MetricsPrimaryDataModel.siccode" />
+          <EntitySet Name="statecountycodes" EntityType="MetricsPrimaryDataModel.statecountycode" />
+          <AssociationSet Name="fk_PrimaryData_Carrier" Association="MetricsPrimaryDataModel.fk_PrimaryData_Carrier">
+            <End Role="carrier" EntitySet="carriers" />
+            <End Role="primarydata" EntitySet="primarydatas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ContactInformation_PrimaryData" Association="MetricsPrimaryDataModel.fk_ContactInformation_PrimaryData">
+            <End Role="primarydata" EntitySet="primarydatas" />
+            <End Role="contactinformation" EntitySet="contactinformations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PrimaryData_CountyInformation" Association="MetricsPrimaryDataModel.fk_PrimaryData_CountyInformation">
+            <End Role="countyinformation" EntitySet="countyinformations" />
+            <End Role="primarydata" EntitySet="primarydatas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PrimaryData_EmpSizeCode" Association="MetricsPrimaryDataModel.fk_PrimaryData_EmpSizeCode">
+            <End Role="employeesizecode" EntitySet="employeesizecodes" />
+            <End Role="primarydata" EntitySet="primarydatas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="carrier">
+          <Key>
+            <PropertyRef Name="naicNumber" />
+          </Key>
+          <Property Type="Decimal" Name="naicNumber" Nullable="false" />
+          <Property Type="String" Name="naicName" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="naicGroupNumber" />
+          <Property Type="String" Name="naicGroupName" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="createdDate" />
+          <Property Type="String" Name="createdBy" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="modifiedDate" />
+          <Property Type="String" Name="modifiedBy" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="primarydatas" Relationship="MetricsPrimaryDataModel.fk_PrimaryData_Carrier" FromRole="carrier" ToRole="primarydata" />
+        </EntityType>
+        <EntityType Name="classcode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="contactinformation">
+          <Key>
+            <PropertyRef Name="contactInformationId" />
+          </Key>
+          <Property Type="Int64" Name="contactInformationId" Nullable="false" />
+          <Property Type="Decimal" Name="masterUId" Nullable="false" />
+          <Property Type="String" Name="contactName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="title" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="phoneNumber" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="emailAddress" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="createdDate" />
+          <Property Type="String" Name="createdBy" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="modifiedDate" />
+          <Property Type="String" Name="modifiedBy" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="primarydata" Relationship="MetricsPrimaryDataModel.fk_ContactInformation_PrimaryData" FromRole="contactinformation" ToRole="primarydata" />
+        </EntityType>
+        <EntityType Name="countyinformation">
+          <Key>
+            <PropertyRef Name="countyCode" />
+          </Key>
+          <Property Type="Int64" Name="countyCode" Nullable="false" />
+          <Property Type="String" Name="countyName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="createdDate" />
+          <Property Type="String" Name="createdBy" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="modifiedDate" />
+          <Property Type="String" Name="modifiedBy" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="primarydatas" Relationship="MetricsPrimaryDataModel.fk_PrimaryData_CountyInformation" FromRole="countyinformation" ToRole="primarydata" />
+        </EntityType>
+        <EntityType Name="employeesizecode">
+          <Key>
+            <PropertyRef Name="empSizeCode" />
+          </Key>
+          <Property Type="Byte" Name="empSizeCode" Nullable="false" />
+          <Property Type="String" Name="description" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="dnb" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="createdDate" />
+          <Property Type="String" Name="createdBy" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="modifiedDate" />
+          <Property Type="String" Name="modifiedBy" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="primarydatas" Relationship="MetricsPrimaryDataModel.fk_PrimaryData_EmpSizeCode" FromRole="employeesizecode" ToRole="primarydata" />
+        </EntityType>
+        <EntityType Name="primarydata">
+          <Key>
+            <PropertyRef Name="masterUId" />
+          </Key>
+          <Property Type="Decimal" Name="masterUId" Nullable="false" />
+          <Property Type="String" Name="rmId" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Type="Byte" Name="recordType" />
+          <Property Type="String" Name="description" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="address" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="city" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="state" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="zip" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="zipExt" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="Single" Name="lat" />
+          <Property Type="Single" Name="long" />
+          <Property Type="Int64" Name="countyCode" />
+          <Property Type="Byte" Name="empSizeCode" />
+          <Property Type="Int64" Name="peoPayRollId" />
+          <Property Type="String" Name="sicCode" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="classCode" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="naicsCode" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="statusCode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="dunsNumber" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Type="Byte" Name="dunsConfidenceCode" />
+          <Property Type="Byte" Name="dnbClass" />
+          <Property Type="String" Name="experianID" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="naicNumber" />
+          <Property Type="String" Name="effectiveDate" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="effectiveMonth" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="createdDate" />
+          <Property Type="String" Name="createdBy" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="modifiedDate" />
+          <Property Type="String" Name="modifiedBy" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="carrier" Relationship="MetricsPrimaryDataModel.fk_PrimaryData_Carrier" FromRole="primarydata" ToRole="carrier" />
+          <NavigationProperty Name="contactinformations" Relationship="MetricsPrimaryDataModel.fk_ContactInformation_PrimaryData" FromRole="primarydata" ToRole="contactinformation" />
+          <NavigationProperty Name="countyinformation" Relationship="MetricsPrimaryDataModel.fk_PrimaryData_CountyInformation" FromRole="primarydata" ToRole="countyinformation" />
+          <NavigationProperty Name="employeesizecode" Relationship="MetricsPrimaryDataModel.fk_PrimaryData_EmpSizeCode" FromRole="primarydata" ToRole="employeesizecode" />
+        </EntityType>
+        <EntityType Name="siccode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Division_Letter" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Division_Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SIC_2_Digit_Code" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SIC_2_Digit_Code_Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SIC_3_Digit_Code" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SIC_3_Digit_Code_Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SIC_4_Digit_Code" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SIC_4_Digit_Code_Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="statecountycode">
+          <Key>
+            <PropertyRef Name="County_Number" />
+          </Key>
+          <Property Type="Int32" Name="County_Number" Nullable="false" />
+          <Property Type="String" Name="County_Description" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="State_Prefix" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="State_Description" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_PrimaryData_Carrier">
+          <End Type="MetricsPrimaryDataModel.carrier" Role="carrier" Multiplicity="0..1" />
+          <End Type="MetricsPrimaryDataModel.primarydata" Role="primarydata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carrier">
+              <PropertyRef Name="naicNumber" />
+            </Principal>
+            <Dependent Role="primarydata">
+              <PropertyRef Name="naicNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ContactInformation_PrimaryData">
+          <End Type="MetricsPrimaryDataModel.primarydata" Role="primarydata" Multiplicity="1" />
+          <End Type="MetricsPrimaryDataModel.contactinformation" Role="contactinformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="primarydata">
+              <PropertyRef Name="masterUId" />
+            </Principal>
+            <Dependent Role="contactinformation">
+              <PropertyRef Name="masterUId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PrimaryData_CountyInformation">
+          <End Type="MetricsPrimaryDataModel.countyinformation" Role="countyinformation" Multiplicity="0..1" />
+          <End Type="MetricsPrimaryDataModel.primarydata" Role="primarydata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="countyinformation">
+              <PropertyRef Name="countyCode" />
+            </Principal>
+            <Dependent Role="primarydata">
+              <PropertyRef Name="countyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PrimaryData_EmpSizeCode">
+          <End Type="MetricsPrimaryDataModel.employeesizecode" Role="employeesizecode" Multiplicity="0..1" />
+          <End Type="MetricsPrimaryDataModel.primarydata" Role="primarydata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employeesizecode">
+              <PropertyRef Name="empSizeCode" />
+            </Principal>
+            <Dependent Role="primarydata">
+              <PropertyRef Name="empSizeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model1" />
+        <Alias Key="Target" Value="Model1.Store" />
+        <EntityContainerMapping CdmEntityContainer="MetricsPrimaryDataModelEntities" StorageEntityContainer="Model1StoreContainer">
+          <EntitySetMapping Name="carriers">
+            <EntityTypeMapping TypeName="MetricsPrimaryDataModel.carrier">
+              <MappingFragment StoreEntitySet="carrier">
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="naicGroupName" ColumnName="naicGroupName" />
+                <ScalarProperty Name="naicGroupNumber" ColumnName="naicGroupNumber" />
+                <ScalarProperty Name="naicName" ColumnName="naicName" />
+                <ScalarProperty Name="naicNumber" ColumnName="naicNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="classcodes">
+            <EntityTypeMapping TypeName="MetricsPrimaryDataModel.classcode">
+              <MappingFragment StoreEntitySet="classcodes">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contactinformations">
+            <EntityTypeMapping TypeName="MetricsPrimaryDataModel.contactinformation">
+              <MappingFragment StoreEntitySet="contactinformation">
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="contactName" ColumnName="contactName" />
+                <ScalarProperty Name="masterUId" ColumnName="masterUId" />
+                <ScalarProperty Name="contactInformationId" ColumnName="contactInformationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="countyinformations">
+            <EntityTypeMapping TypeName="MetricsPrimaryDataModel.countyinformation">
+              <MappingFragment StoreEntitySet="countyinformation">
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="countyName" ColumnName="countyName" />
+                <ScalarProperty Name="countyCode" ColumnName="countyCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employeesizecodes">
+            <EntityTypeMapping TypeName="MetricsPrimaryDataModel.employeesizecode">
+              <MappingFragment StoreEntitySet="employeesizecode">
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="dnb" ColumnName="dnb" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="empSizeCode" ColumnName="empSizeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="primarydatas">
+            <EntityTypeMapping TypeName="MetricsPrimaryDataModel.primarydata">
+              <MappingFragment StoreEntitySet="primarydata">
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="modifiedDate" ColumnName="modifiedDate" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="effectiveMonth" ColumnName="effectiveMonth" />
+                <ScalarProperty Name="effectiveDate" ColumnName="effectiveDate" />
+                <ScalarProperty Name="naicNumber" ColumnName="naicNumber" />
+                <ScalarProperty Name="experianID" ColumnName="experianID" />
+                <ScalarProperty Name="dnbClass" ColumnName="dnbClass" />
+                <ScalarProperty Name="dunsConfidenceCode" ColumnName="dunsConfidenceCode" />
+                <ScalarProperty Name="dunsNumber" ColumnName="dunsNumber" />
+                <ScalarProperty Name="statusCode" ColumnName="statusCode" />
+                <ScalarProperty Name="naicsCode" ColumnName="naicsCode" />
+                <ScalarProperty Name="classCode" ColumnName="classCode" />
+                <ScalarProperty Name="sicCode" ColumnName="sicCode" />
+                <ScalarProperty Name="peoPayRollId" ColumnName="peoPayRollId" />
+                <ScalarProperty Name="empSizeCode" ColumnName="empSizeCode" />
+                <ScalarProperty Name="countyCode" ColumnName="countyCode" />
+                <ScalarProperty Name="long" ColumnName="long" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="zipExt" ColumnName="zipExt" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="recordType" ColumnName="recordType" />
+                <ScalarProperty Name="rmId" ColumnName="rmId" />
+                <ScalarProperty Name="masterUId" ColumnName="masterUId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="siccodes">
+            <EntityTypeMapping TypeName="MetricsPrimaryDataModel.siccode">
+              <MappingFragment StoreEntitySet="siccodes">
+                <ScalarProperty Name="SIC_4_Digit_Code_Name" ColumnName="SIC_4_Digit_Code_Name" />
+                <ScalarProperty Name="SIC_4_Digit_Code" ColumnName="SIC_4_Digit_Code" />
+                <ScalarProperty Name="SIC_3_Digit_Code_Name" ColumnName="SIC_3_Digit_Code_Name" />
+                <ScalarProperty Name="SIC_3_Digit_Code" ColumnName="SIC_3_Digit_Code" />
+                <ScalarProperty Name="SIC_2_Digit_Code_Name" ColumnName="SIC_2_Digit_Code_Name" />
+                <ScalarProperty Name="SIC_2_Digit_Code" ColumnName="SIC_2_Digit_Code" />
+                <ScalarProperty Name="Division_Name" ColumnName="Division_Name" />
+                <ScalarProperty Name="Division_Letter" ColumnName="Division_Letter" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statecountycodes">
+            <EntityTypeMapping TypeName="MetricsPrimaryDataModel.statecountycode">
+              <MappingFragment StoreEntitySet="statecountycode">
+                <ScalarProperty Name="State_Description" ColumnName="State Description" />
+                <ScalarProperty Name="State_Prefix" ColumnName="State Prefix" />
+                <ScalarProperty Name="County_Description" ColumnName="County Description" />
+                <ScalarProperty Name="County_Number" ColumnName="County Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Model1" >
+        <EntityTypeShape EntityType="MetricsPrimaryDataModel.carrier" Width="1.5" PointX="0.75" PointY="4.25" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="MetricsPrimaryDataModel.classcode" Width="1.5" PointX="5.75" PointY="1.5" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="MetricsPrimaryDataModel.contactinformation" Width="1.5" PointX="5.25" PointY="4" Height="3.1340950520833317" />
+        <EntityTypeShape EntityType="MetricsPrimaryDataModel.countyinformation" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3648893229166745" />
+        <EntityTypeShape EntityType="MetricsPrimaryDataModel.employeesizecode" Width="1.5" PointX="0.75" PointY="7.875" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="MetricsPrimaryDataModel.primarydata" Width="1.5" PointX="3" PointY="1.875" Height="7.3647265625000022" />
+        <EntityTypeShape EntityType="MetricsPrimaryDataModel.siccode" Width="1.5" PointX="7.75" PointY="1.5" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="MetricsPrimaryDataModel.statecountycode" Width="1.5" PointX="7.75" PointY="5.5" Height="1.7879850260416674" />
+        <AssociationConnector Association="MetricsPrimaryDataModel.fk_PrimaryData_Carrier" >
+          <ConnectorPoint PointX="2.25" PointY="5.62474609375" />
+          <ConnectorPoint PointX="3" PointY="5.62474609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="MetricsPrimaryDataModel.fk_ContactInformation_PrimaryData" >
+          <ConnectorPoint PointX="4.5" PointY="5.5670475260416659" />
+          <ConnectorPoint PointX="5.25" PointY="5.5670475260416659" />
+        </AssociationConnector>
+        <AssociationConnector Association="MetricsPrimaryDataModel.fk_PrimaryData_CountyInformation" >
+          <ConnectorPoint PointX="2.25" PointY="2.4949446614583373" />
+          <ConnectorPoint PointX="3" PointY="2.4949446614583373" />
+        </AssociationConnector>
+        <AssociationConnector Association="MetricsPrimaryDataModel.fk_PrimaryData_EmpSizeCode" >
+          <ConnectorPoint PointX="2.25" PointY="8.5573632812500016" />
+          <ConnectorPoint PointX="3" PointY="8.5573632812500016" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

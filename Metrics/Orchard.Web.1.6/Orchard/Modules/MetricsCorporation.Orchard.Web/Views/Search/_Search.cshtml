@@ -1,0 +1,134 @@
+﻿@model MetricsCorporation.Models.SearchModel
+<div id="searchContainer">
+    <div class="k-widget k-header" style="height: 600px; border-bottom: none">
+        <div style="float: left; display: block; width: 200px" class="drop-shadow curved-hz-2">
+            <h4 style="text-align: center;">
+                Top 10 Searches</h4>
+            <ol id="topSearch" data-bind="foreach: topsearches">
+                <li>
+                    <div>
+                        <a href="#" data-bind="click: $parent.goTosearch, text: SearchName"></a>
+                    </div>
+                </li>
+            </ol>
+        </div>
+        <div id="divSearchCriteriawrapper">
+            <div id="divSearchCriteria">
+                <ul id="search-div" style="float: left; display: block; width: 655px" class="drop-shadow curved-hz-2">
+                    <li>
+                        <div id="searchTag">
+                            <ul class="nav nav-tabs" style="margin-bottom: 0px;">
+                                <li class="active"><a href="#prospect-list-div" data-toggle="tab">Geography</a></li>
+                                <li><a href="#demoGraphics-div" data-toggle="tab">Demographics</a></li>
+                                <li><a href="#company-Insurance-div" data-toggle="tab">Insurance</a></li>
+                                <li><a href="#company-search-div" data-toggle="tab">Company</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tab-content" style="overflow-y: auto">
+                            <div class="tab-pane active" id="prospect-list-div">
+                                <ul>
+                                    <li>Geography
+                                        <div id="treeview-Geography" class="tab-pane" style="overflow-y: auto; max-height: 400px;">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="demoGraphics-div">
+                                <div id="treeViewHolder" style="height: 300px; margin-top: 10px;">
+                                    <ul class="nav nav-tabs" style="margin-bottom: 0px;">
+                                        <li class="active"><a href="#treeview-sic-code-p" data-toggle="tab">Sic Codes</a></li>
+                                        <li><a href="#treeview-class-code-p" data-toggle="tab">Class Codes</a></li>
+                                    </ul>
+                                    <div class="tab-content" style="height: 300px; overflow-y: auto">
+                                        <div class="tab-pane active" id="treeview-sic-code-p">
+                                            <div id="treeview-sic-code">
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="treeview-class-code-p">
+                                            <div id="treeview-class-code">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li>@Html.LabelFor(model => model.EmployeeSize, new { style = "margin-top: 30px;" })
+                                        <div id="slider" data-bind="kendoRangeSlider: { values: employeeSizeInput, min: 0, max: 7, tickPlacement: 'both' }"
+                                            style="margin: 30px 0px 30px 0px; width: 500px">
+                                            <input />
+                                            <input />
+                                        </div>
+                                    </li>
+                                    <li style="height: 32px;">@Html.LabelFor(model => model.PhoneNumber)
+                                        <label style="display: inline-block; white-space: nowrap; padding: 0px 0px;">
+                                            <input type="checkbox" data-bind="checked: phoneNumberInput" style="margin-top: -1px;
+                                                margin-right: 5px;" />Only Records with Phone Numbers</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="company-search-div">
+                                <ul style="margin-top: 10px;">
+                                    <li>@Html.LabelFor(model => model.CompanyName)
+                                        <input id="CompanyAutoComplete" type="text" />
+                                    </li>
+                                    <li>@Html.LabelFor(model => model.City)
+                                        <input id="City" name="City" type="text" value="" data-bind="value: cityInput" />
+                                    </li>
+                                    <li>@Html.LabelFor(model => model.Zip)
+                                        <input id="Zip" name="Zip" type="text" value="" data-bind="value: zipInput" />
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="company-Insurance-div">
+                                <ul>
+                                    <li>
+                                        <div>@Html.LabelFor(model => model.RenewalMonths)
+                                            <select id="renewals" multiple data-bind="options: renewals, optionsValue: 'id', optionsText: 'name', selectedOptions: selectMonths, select2: { placeholder: 'Select a Renewal month' }"
+                                                style="width: 300px">
+                                            </select></div>
+                                    </li>
+                                    <!-- ko if: showCarrierTree -->
+                                    <li>
+                                        <br />
+                                        Carrier Group
+                                        <div id="treeview-CarrierGroup" class="tab-pane" style="overflow-y: auto; max-height: 400px;">
+                                        </div>
+                                    </li>
+                                    <!-- /ko -->
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        @Html.LabelFor(model => model.SearchName)
+                        <input id="SearchName" name="SearchName" type="text" value="" data-bind="value: searchNameInput" />
+                        @Html.ValidationMessageFor(model => model.SearchName)
+                        <p style="float: right">
+                            <input type="button" value="Search" data-bind="click: do_search" class="k-button" />
+                            <input type="reset" value="Clear" data-bind="click: do_reset" class="k-button" />
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div id="divSelectedCriteriaWrapper">
+                <div id="divSelectedCriteria" style="float: left; display: block; width: 200px; min-height: 350px;"
+                    class="drop-shadow curved-hz-2">
+                    <h4 style="text-align: center;">
+                        Your Selected Criteria</h4>
+                    <div id="selectedCriteriaPanel">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul>
+            <li id="listItem" style="visibility: hidden"><span></span>
+                <img src="@Href("~/Modules/MetricsCorporation.Orchard.Web/Styles/images/close_20x20.png")" alt="Close"
+                    style="cursor: pointer; margin-left: 5px;" data-bind="click: removeCriteria" />
+                <br />
+            </li>
+        </ul>
+    </div>
+</div>

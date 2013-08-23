@@ -1,0 +1,150 @@
+﻿@model MetricsCorporation.Models.FileListModel
+           
+<div id="fileListItemDetail" data-bind="with: selectedItem, kendoWindow: { isOpen: isOpenDetailView, visible: false, actions: ['Close', 'Minimize', 'Maximize', 'Refresh'], modal: true }">
+    <div>
+        <input type="button" value="Cancel" data-bind="click: $parent.backToList, visible: isEditMode()"
+            class="k-button" />
+        <input type="button" value="Save" data-bind="click: $parent.saveItem, visible: isEditMode()"
+            class="k-button" />
+        <input type="button" value="Add" data-bind="click: $parent.beginAddItem, visible: !isEditMode()"
+            class="k-button" />
+        <input type="button" value="Edit" data-bind="click: $parent.beginEditItem, visible: !isEditMode()"
+            class="k-button" />
+        <input type="button" value="Copy" data-bind="click: $parent.beginCopyItem, visible: !isEditMode()"
+            class="k-button" />
+        <input type="button" value="Delete" data-bind="click: $parent.deleteItem, visible: !isEditMode()"
+            class="k-button" />
+    </div>
+    <div class="row">
+        <div class="span5">
+            <table class="table table-hover">
+                <tr data-bind="visible: !isEditMode()">
+                    <td>@Html.DisplayNameFor(model => model.Id):
+                    </td>
+                    <td>
+                        <span data-bind="text: Id"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.UserName):
+                    </td>
+                    <td>
+                        <span data-bind="text: UserName, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="value: UserName, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Password):
+                    </td>
+                    <td>
+                        <span data-bind="text: Password, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="value: Password, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.FilePath):
+                    </td>
+                    <td>
+                        <span data-bind="text: FilePath, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="value: FilePath, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr data-bind="visible: !isEditMode()">
+                    <td>@Html.DisplayNameFor(model => model.LastLoginDate):
+                    </td>
+                    <td>
+                        <span data-bind="text: LastLoginDate, visible: !isEditMode()"></span>
+                        @*<input type="text" data-bind="value: LastLoginDate, visible: isEditMode()" />*@
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.States):
+                    </td>
+                    <td>
+                        <span data-bind="text: States, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="kendoAutoComplete: { dataTextField: 'name', dataValueField: 'id', data: StatesCollection, value: States, separator: ',' }" style="width: 220px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RenewalDate):
+                    </td>
+                    <td>
+                        <span data-bind="text: RenewalDate, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="value: RenewalDate, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.ExpirationDate):
+                    </td>
+                    <td>
+                        <span data-bind="text: ExpirationDate, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="value: ExpirationDate, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.CompanyName):
+                    </td>
+                    <td>
+                        <span data-bind="text: CompanyName, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="value: CompanyName, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Admin):
+                    </td>
+                    <td>
+                        <input type="checkbox" data-bind="checked: Admin, enable: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.CanexportList):
+                    </td>
+                    <td>
+                        <input type="checkbox" data-bind="checked: CanexportList, enable: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Name):
+                    </td>
+                    <td>
+                        <span data-bind="text: Name, visible: !isEditMode()"></span>
+                        <input type="text" data-bind="value: Name, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.MaxReportViewsPerMonth):
+                    </td>
+                    <td>
+                        <span data-bind="text: MaxReportViewsPerMonth, visible: !isEditMode()"></span>
+                        <input type="number" data-bind="value: MaxReportViewsPerMonth, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.MaxExports):
+                    </td>
+                    <td>
+                        <span data-bind="text: MaxExports, visible: !isEditMode()"></span>
+                        <input type="number" data-bind="value: MaxExports, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.ShowCarrier):
+                    </td>
+                    <td>
+                        <span data-bind="text: MaxExports, visible: !isEditMode()"></span>
+                        <input type="checkbox" data-bind="value: ShowCarrier, visible: isEditMode()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.ShowStatusFld):
+                    </td>
+                    <td>
+                        <span data-bind="text: MaxJigsawExports, visible: !isEditMode()"></span>
+                        <input type="checkbox" data-bind="value: ShowStatusFld, visible: isEditMode()" />
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
+</div>

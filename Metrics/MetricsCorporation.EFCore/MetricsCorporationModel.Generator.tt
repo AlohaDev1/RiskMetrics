@@ -1,0 +1,155 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true"#>
+<#@ output extension=".cs"#>
+
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Linq" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="EF.Utility.CS.ttinclude"#>
+<#@ include file="_BaseTemplate.tt" #>
+<#@ include file="_BaseEntityTemplate.tt" #>
+<#@ include file="_ModelEntityGenerator.tt" #>
+<#@ include file="_ModelEntityMetadataGenerator.tt" #>
+<#@ include file="_ModelEntityInterfaceGenerator.tt" #>
+<#@ include file="_ModelComplexEntityGenerator.tt" #>
+<#@ include file="_RepositoryGenerator.tt" #>
+<#@ include file="_RestModelEntityGenerator.tt" #>
+
+<#
+
+string inputFile = @"MetricsCorporationModel.edmx";
+string prefix = "MetricsCorporation";
+
+var loader = new MetadataLoader(this);
+var code = new CodeGenerationTools(this);
+var EFTools = new MetadataTools(this);
+var ObjectNamespace = code.VsNamespaceSuggestion();
+var ModelNamespace = loader.GetModelNamespace(inputFile);
+var itemCollection = loader.CreateEdmItemCollection(inputFile);
+var container = itemCollection.GetItems<EntityContainer>().FirstOrDefault();
+
+//Debugger.Break();
+
+if (container == null)
+{
+    return string.Empty;
+}
+
+// real list of entities to generate REST controllers for
+string entityStrFile = Host.ResolvePath("_RestEntities.txt");
+string entityString = FileToStr(entityStrFile);
+// split on lines
+
+var restEntities = entityString.Split(new string[] { "\n"}, StringSplitOptions.RemoveEmptyEntries);	
+
+
+StringBuilder s = new StringBuilder();
+
+// for every entity
+foreach (var entity in itemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+	s.AppendLine(entity.Name);	
+	
+	_ModelEntityGenerator genEntity = new _ModelEntityGenerator();			
+	genEntity.Namespace = "MetricsCorporation.Entities";
+	genEntity.InitGeneratorTemplate(prefix, entity, container, code);
+	genEntity.Output.BuildAction = BuildAction.Compile;
+	genEntity.Output.Project = @"..\MetricsCorporation.Entities\MetricsCorporation.Entities.csproj";							
+	genEntity.Render();	
+
+	_ModelEntityInterfaceGenerator genIntEntity = new _ModelEntityInterfaceGenerator();			
+	genIntEntity.Namespace = "MetricsCorporation.Entities";
+	genIntEntity.InitGeneratorTemplate(entity, container, code);
+	genIntEntity.Output.BuildAction = BuildAction.Compile;
+	genIntEntity.Output.Project = @"..\MetricsCorporation.Entities\MetricsCorporation.Entities.csproj";							
+	genIntEntity.Render();	
+
+	_ModelEntityMetadataGenerator genEntityMeta = new _ModelEntityMetadataGenerator();
+	genEntityMeta.Namespace = "MetricsCorporation.Entities.Metadata";
+	genEntityMeta.InitGeneratorTemplate(entity, container, code);
+	genEntityMeta.Output.BuildAction = BuildAction.Compile;
+	genEntityMeta.Output.Project = @"..\MetricsCorporation.Entities\MetricsCorporation.Entities.csproj";						
+	genEntityMeta.Render();
+	
+	_RepositoryGenerator genRepository = new _RepositoryGenerator();
+	genRepository.Namespace = "MetricsCorporation.EFCore.Repository";
+	genRepository.InitGeneratorTemplate(entity, container, code); 
+	genRepository.Render();	
+	
+	_RestModelEntityGenerator genRestEntity = new _RestModelEntityGenerator();			
+	genRestEntity.Namespace = "MetricsCorporation.Entities.Rest";
+	genRestEntity.InitGeneratorTemplate(prefix, entity, container, code);
+	genRestEntity.Output.BuildAction = BuildAction.Compile;
+	genRestEntity.Output.Project = @"..\MetricsCorporation.Entities\MetricsCorporation.Entities.csproj";							
+	genRestEntity.Render();	
+}
+
+//string entityFile = Host.ResolvePath("Entities.txt");
+//StrToFile(s.ToString(), entityFile);
+Debug.Print(s.ToString());
+
+
+foreach (var entity in itemCollection.GetItems<ComplexType>().OrderBy(e => e.Name))
+{
+	_ModelComplexEntityGenerator generator = new _ModelComplexEntityGenerator();
+	generator.Namespace = "MetricsCorporation.Entities";
+	generator.InitGeneratorTemplate(prefix, entity, container, code);
+	generator.Output.BuildAction = BuildAction.Compile;
+	generator.Output.Project = @"..\MetricsCorporation.Entities\MetricsCorporation.Entities.csproj";							
+	generator.Render();	
+}
+#>
+
+<#+ 
+	/// <summary>
+    /// Return file contents as string
+    /// </summary>
+    /// <param name="cFileName"></param>
+    /// <returns></returns>
+    public string FileToStr(string cFileName)
+    {
+        //Create a StreamReader and open the file
+        StreamReader oReader = System.IO.File.OpenText(cFileName);
+
+        //Read all the contents of the file in a string
+        string lcString = oReader.ReadToEnd();
+
+        //Close the StreamReader and return the string
+        oReader.Close();
+        return lcString;
+    }
+	
+	public static bool StrToFile(string data, string fileName)
+    {
+        //Check if the sepcified file exists
+        if (System.IO.File.Exists(fileName) == true)
+        {
+            // If so then Erase the file first as in this case 
+            // we are overwriting
+            System.IO.File.Delete(fileName);
+        }
+
+        //Create the file if it does not exist and open it
+        FileStream oFs = new
+            FileStream(fileName, FileMode.CreateNew, FileAccess.ReadWrite);
+
+        //Create a writer for the file
+        StreamWriter oWriter = new StreamWriter(oFs);
+
+        //Write the contents
+        oWriter.Write(data);
+        oWriter.Flush();
+        oWriter.Close();
+
+        oFs.Close();
+
+        return true;
+    }
+ #>

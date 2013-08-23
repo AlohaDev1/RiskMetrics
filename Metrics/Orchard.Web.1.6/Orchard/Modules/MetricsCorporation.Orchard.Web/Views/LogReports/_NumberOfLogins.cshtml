@@ -1,0 +1,18 @@
+﻿
+<div id="NumberOfLoginsViewWindow" data-bind="kendoWindow: { isOpen: isNumberOfLoginsViewWindow, visible: false, actions: ['Close', 'Minimize', 'Maximize', 'Refresh'], modal: true }">
+    @*<h2>Logins by - <span data-bind="text: currentUser().FullName"></span></h2>*@
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <td>Login Date</td>
+                <td>Number Of Times Logged In</td>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: currentNumberOfLogins">
+            <tr>
+                <td><span data-bind="text: LoginDateFormat"></span></td>
+                <td><span data-bind="text: Count"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

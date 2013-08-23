@@ -1,0 +1,60 @@
+﻿<#+ 
+public class BaseEntityTemplate : BaseTemplate
+{	
+	public BaseEntityTemplate(){}
+	
+	protected void WriteProperty(CodeGenerationTools _code, EdmProperty edmProperty)
+	{
+	    WriteProperty(Accessibility.ForProperty(edmProperty),
+	                  _code.Escape(edmProperty.TypeUsage),
+	                  _code.Escape(edmProperty),
+	                  _code.SpaceAfter(Accessibility.ForGetter(edmProperty)),
+	                  _code.SpaceAfter(Accessibility.ForSetter(edmProperty)));
+	}
+
+	protected void WriteNavigationProperty(CodeGenerationTools _code, NavigationProperty navigationProperty)
+	{
+	    var endType = _code.Escape(navigationProperty.ToEndMember.GetEntityType());
+	    WriteProperty(PropertyVirtualModifier(Accessibility.ForProperty(navigationProperty)),
+	                  navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many ? ("ICollection<" + endType + ">") : endType,
+	                  _code.Escape(navigationProperty),
+	                  _code.SpaceAfter(Accessibility.ForGetter(navigationProperty)),
+	                  _code.SpaceAfter(Accessibility.ForSetter(navigationProperty)));
+	}
+
+	protected void WriteProperty(string accessibility, string type, string name, string getterAccessibility, string setterAccessibility)
+	{#>
+    <#=accessibility#> <#=type#> <#=name#> { <#=getterAccessibility#>get; <#=setterAccessibility#>set; }
+<#+
+	}
+
+	protected string PropertyVirtualModifier(string accessibility)
+	{
+	    return accessibility + (accessibility != "private" ? " virtual" : "");
+	}
+
+	protected bool VerifyTypesAreCaseInsensitiveUnique(EdmItemCollection itemCollection)
+	{
+	    var alreadySeen = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+	    foreach(var type in itemCollection.GetItems<StructuralType>())
+	    {
+	        if (!(type is EntityType || type is ComplexType))
+	        {
+	            continue;
+	        }
+
+	        if (alreadySeen.ContainsKey(type.FullName))
+	        {
+	            Error(String.Format(CultureInfo.CurrentCulture, "This template does not support types that differ only by case, the types {0} are not supported", type.FullName));
+	            return false;
+	        }
+	        else
+	        {
+	            alreadySeen.Add(type.FullName, true);
+	        }
+	    }
+
+	    return true;
+	}
+}
+#>

@@ -1,0 +1,86 @@
+﻿<div id="QuickSearchDiv">
+    <table style="height: 300px;">
+        <tr>
+            <td>
+                <b>Quick Search </b>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 20%; margin-right: 200px;">
+                SIC Code
+                <div style="height: auto; min-height: 25px; width: 155px; padding: 8px; border-radius: 4px;
+                    border: 1px solid gray;" id="divSicQuickSearch" data-bind="click: $root.toggleClassSicCodesDialog">
+                    <ul>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 20%; margin-right: 200px;">
+                Class Code
+                <div style="height: auto; min-height: 25px; width: 155px; padding: 8px; border-radius: 4px;
+                    border: 1px solid gray;" id="divClassQuickSearch" data-bind="click: $root.toggleClassSicCodesDialog">
+                    <ul>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Renewal Months
+                <select id="renewalsQuickSearch" multiple data-bind="options: renewals, optionsValue: 'id', optionsText: 'name',selectedOptions: QSselectMonths, select2: { placeholder: 'Select a Renewal month' }"
+                    style="width: 175px;" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Employee Size
+                <select id="EmployeeSizeQuickSearch" multiple data-bind="options: EmployeeSize, optionsValue: 'id', optionsText: 'name', selectedOptions: QSEmployeeSize, select2: { placeholder: 'Select EmployeeSize' }"
+                    style="width: 175px;" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 20%; margin-right: 200px;">
+                Company Name @*  <input id="CompanyNameQuickSearch" data-bind="kendoAutoComplete: { dataTextField: 'Description', dataValueField: 'Id', data: combs,value: QScompanyInput }" />*@
+                <input id="QSCompanyAutoComplete" data-bind="value: QScompanyInput" style="width: 161px;"
+                    type="text" />
+            </td>
+        </tr>
+        @*  <tr>
+            <td style="width: 20%; margin-right: 200px;">
+                City<br />
+                <input class="k-textbox" id="CityQuickSearch" name="City" type="text" value="" style="height: 25px;"
+                    data-bind="value: QScityInput" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Zip<br />
+                <input class="k-textbox" id="ZipQuickSearch" name="Zip" type="text" value="" style="height: 25px;"
+                    data-bind="value: QSzipInput" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                County Name
+                <input id="CountyNameQuickSearch" data-bind="kendoAutoComplete: { dataTextField: 'Description', dataValueField: 'Id', data: counties,value: QScountyNameInput, separator: ', ' }" />
+            </td>
+        </tr>*@
+        <tr>
+            <td>
+                <label style="display: inline-block; white-space: nowrap;">
+                    <input id="PhoneQuickSearch" type="checkbox" data-bind="checked: QSphoneNumberInput"
+                        style="margin-top: -1px; margin-right: 5px;" />Records with Phone Numbers</label>
+               
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="Search" data-bind="click: do_Quicksearch" class="k-button"
+                    style="height: 25px;" />
+                <input type="reset" value="Clear" data-bind="click: do_QSreset" class="k-button"
+                    style="height: 25px;" />
+            </td>
+        </tr>
+    </table>
+</div>

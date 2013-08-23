@@ -1,0 +1,80 @@
+﻿<#+
+// <copyright file="_ModelEntityInterfaceGenerator">
+//  Copyright © ... All Rights Reserved.
+// </copyright>
+
+public class _ModelEntityInterfaceGenerator : BaseTemplate
+{
+	private Dictionary<string, string> _interfacesList = new Dictionary<string, string>();
+	
+	private EntityType _entity;
+	private EntityContainer _container;
+	
+	private string _entityName;	 	
+	private string _className;	 
+
+	private string _interface="";
+	
+	public void InitGeneratorTemplate(EntityType entity, EntityContainer container, CodeGenerationTools code)
+	{
+		_entity = entity;
+		_code = code;
+		_container = container;
+		_entityName = _code.Escape(_entity);
+		_className = string.Format("{0}", _entityName);
+
+		this.Output.File = string.Format("Generated\\{0}.Interface.Generated.cs", _className);	
+		
+		// init dictionaries woth interfaces	
+		_interfacesList.Add("Active", "ISupportActive");
+		_interfacesList.Add("Deleted", "ISupportSoftDelete");
+		
+		StringBuilder s = new StringBuilder();
+        string delim = "";
+
+        foreach (var property in entity.Properties)
+	    {
+		    if (_interfacesList.ContainsKey(property.Name))
+            {
+                s.AppendFormat("{0}{1}", delim, _interfacesList[property.Name]);
+                delim = ",";
+            }
+	    }
+		
+		if (s.Length>0)
+			_interface = s.ToString();
+
+	}	
+	
+	public override string TransformText()
+	{
+		if (_interface!= "")
+		{
+#>//-------------------------------------------------------------------------------------------------
+//    Interfaces partial class
+//    Hisory Changes:
+//
+//    2012/07/06
+//		- initial version
+//-------------------------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using MetricsCorporation.Infrastructure.Interfaces;
+
+<#+ 	   BeginNamespace();
+#>
+
+<#=Accessibility.ForType(_entity)#> <#=_code.SpaceAfter(_code.AbstractOption(_entity))#>partial class <#=_className#> : <#= _interface #>
+{	
+}
+<#+ 
+	    	EndNamespace();
+		}
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>
+
+

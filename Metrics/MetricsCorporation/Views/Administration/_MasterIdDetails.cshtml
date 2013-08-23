@@ -1,0 +1,48 @@
+﻿@model MetricsCorporation.Models.MasterIdModel
+
+<div id="masterIdItemDetail" data-bind="with: selectedItem, kendoWindow: { isOpen: isOpenDetailView, visible: false, actions: ['Close', 'Minimize', 'Maximize', 'Refresh'], modal: true }">
+    <div>
+        <input type="button" value="Cancel" data-bind="click: $parent.backToList, visible: isEditMode()" class="k-button" />
+        <input type="button" value="Save" data-bind="click: $parent.saveItem, visible: isEditMode()" class="k-button" />
+
+        <input type="button" value="Add" data-bind="click: $parent.beginAddItem, visible: !isEditMode()" class="k-button" />
+        <input type="button" value="Edit" data-bind="click: $parent.beginEditItem, visible: !isEditMode()" class="k-button" />
+        <input type="button" value="Copy" data-bind="click: $parent.beginCopyItem, visible: !isEditMode()" class="k-button" />
+        <input type="button" value="Delete" data-bind="click: $parent.deleteItem, visible: !isEditMode()" class="k-button" />
+    </div>
+    <ul style="float: left; width: 440px">
+        <li data-bind="visible: !isEditMode()" >
+            @Html.DisplayNameFor(model => model.Id): <span data-bind="text: Id"></span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.UserName): <span data-bind="text: UserName, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: UserName, visible: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.Password): <span data-bind="text: Password, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: Password, visible: isEditMode()" />
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.CompanyName): <span data-bind="text: CompanyName, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: CompanyName, visible: isEditMode()" />
+        </li>  
+        <li>
+            @Html.DisplayNameFor(model => model.FirstName): <span data-bind="text: FirstName, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: FirstName, visible: isEditMode()" />
+        </li>  
+         <li>
+            @Html.DisplayNameFor(model => model.LastName): <span data-bind="text: LastName, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: LastName, visible: isEditMode()" />
+         </li>  
+          <li>
+            @Html.DisplayNameFor(model => model.Headline): <span data-bind="text: Headline, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: Headline, visible: isEditMode()" />
+          </li>  
+          <li>
+            @Html.DisplayNameFor(model => model.ProfileRequest): <span data-bind="text: ProfileRequest, visible: !isEditMode()"></span>
+            <input type="text" data-bind="value: ProfileRequest, visible: isEditMode()" />
+          </li>  
+    </ul>
+    
+</div>
+

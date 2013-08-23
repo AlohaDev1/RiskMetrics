@@ -1,0 +1,121 @@
+﻿<#+
+// <copyright file="_ModelEntityGenerator.tt">
+//  Copyright © ... All Rights Reserved.
+// </copyright>
+
+public class _ModelEntityGenerator : BaseEntityTemplate
+{
+	private EntityType _entity;
+	private EntityContainer _container;
+	
+	private string _prefix;
+	
+	private string _entityName;	 
+	
+	public void InitGeneratorTemplate(string prefix, EntityType entity, EntityContainer container, CodeGenerationTools code)
+	{
+		_prefix = prefix;
+		_entity = entity;
+		_code = code;
+		_container = container;
+		_entityName = _code.Escape(_entity);
+		
+		this.Output.File = string.Format("Generated\\{0}.Generated.cs", _entityName);			
+	}
+
+	public override string TransformText()
+	{
+#>/************************************************************
+*
+*	Entity class generated from <#= _prefix #>Model.edmx
+*
+*************************************************************/
+using System;
+using System.Collections.Generic;
+
+<#+
+		BeginNamespace();
+#>
+
+<#=Accessibility.ForType(_entity)#> <#=_code.SpaceAfter(_code.AbstractOption(_entity))#>partial class <#=_code.Escape(_entity)#><#=_code.StringBefore(" : ", _code.Escape(_entity.BaseType))#>
+{
+
+<#+
+
+		var propertiesWithDefaultValues = _entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == _entity && p.DefaultValue != null);
+	    var collectionNavigationProperties = _entity.NavigationProperties.Where(np => np.DeclaringType == _entity && np.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many);
+	    var complexProperties = _entity.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == _entity);
+
+	    if (propertiesWithDefaultValues.Any() || collectionNavigationProperties.Any() || complexProperties.Any())
+	    {
+#>
+    public <#=_code.Escape(_entity)#>()
+    {
+<#+
+	        foreach (var edmProperty in propertiesWithDefaultValues)
+	        {
+#>
+        this.<#=_code.Escape(edmProperty)#> = <#=_code.CreateLiteral(edmProperty.DefaultValue)#>;
+<#+
+	        }
+
+	        foreach (var navigationProperty in collectionNavigationProperties)
+	        {
+#>
+        this.<#=_code.Escape(navigationProperty)#> = new HashSet<<#=_code.Escape(navigationProperty.ToEndMember.GetEntityType())#>>();
+<#+
+	        }
+
+	        foreach (var complexProperty in complexProperties)
+	        {
+#>
+        this.<#=_code.Escape(complexProperty)#> = new <#=_code.Escape(complexProperty.TypeUsage)#>();
+<#+
+	        }
+#>
+    }
+
+<#+
+	    }
+
+	    var primitiveProperties = _entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == _entity);
+	    if (primitiveProperties.Any())
+	    {
+	        foreach (var edmProperty in primitiveProperties)
+	        {
+	            WriteProperty(_code, edmProperty);
+	        }
+	    }
+
+	    if (complexProperties.Any())
+	    {
+#>
+
+<#+
+	        foreach(var complexProperty in complexProperties)
+	        {
+	            WriteProperty(_code, complexProperty);
+	        }
+	    }
+
+	    var navigationProperties = _entity.NavigationProperties.Where(np => np.DeclaringType == _entity);
+	    if (navigationProperties.Any())
+	    {
+#>
+
+<#+
+	        foreach (var navigationProperty in navigationProperties)
+	        {
+	            WriteNavigationProperty(_code, navigationProperty);
+	        }
+	    }
+#>
+
+}
+<#+
+    	EndNamespace();
+		return this.GenerationEnvironment.ToString();
+
+	}	
+}
+#>

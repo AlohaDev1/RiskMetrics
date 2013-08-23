@@ -1,0 +1,27 @@
+﻿<div id="MapView" style="min-height: 620px;">
+    <button class="btn" data-bind="click: GoToSearchView" style="margin: 10px 0px;">
+        <i class=" icon-arrow-left"></i>Go To Search Screen</button>
+    <button class="btn " data-bind="click: $root.toggleExportDialog">
+        <i class=" icon-hdd"></i>Export</button>
+    <input id="ListView" type="button" value="List View" data-bind="click: SwichtoListView"
+        class="k-button" style="width: 100px; height: 30px;" />
+    <h5 data-bind="text: searchResultText">
+    </h5>
+    <table>
+        <tr id="trGridViewWrapper">
+            <td style="width: 20%; float: left; display: block;" id="tdGridView1">
+                @Html.Partial("_QuickSearch")
+            </td>
+            <td style="width: 78%; vertical-align: top;" id="tdQuickSearchWrapper">
+                <div id="divQuickSearch" style="min-width:836px !important;">
+                    <div style="width: 315px; float: left;">
+                        <div data-bind="kendoGrid: companies, gridOptions: gridOptions" id="gridCompanies" />
+                    </div>
+                    <div style="width: 520px; float: left; margin-left:15px;">
+                        @Html.Partial("_Map")
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

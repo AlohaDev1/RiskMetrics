@@ -1,0 +1,65 @@
+﻿
+<div style="margin: 15px 0px">
+    <button type="button" class="btn" data-bind="click: beginAddItem">Add new user</button>            
+</div>
+
+
+<ul class="nav nav-tabs" id="usersTab" >
+    <li class="active"><a href="#all" data-bind="click: switchTab">All Users</a></li>
+    <li><a href="#master" data-bind="click: switchTab">Master</a></li>
+    <li><a href="#carrier" data-bind="click: switchTab">Carrier</a></li>
+    <li><a href="#agency" data-bind="click: switchTab">Agency</a></li>
+    <li><a href="#producer" data-bind="click: switchTab">Producer</a></li>
+</ul>
+
+<table class="table table-bordered table-hover grey-head" >
+    <thead>
+        <tr>
+            
+            <td>Email</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Company Name</td>
+            
+            <td>States</td>
+            <td>Activation Date</td>
+            
+            <td>Expiration Date</td>
+            <td>Admin</td>
+            <td>Can Export List</td>
+            <td>Max Report Views</td>
+            <td>Max exports</td>
+            <td>Max Jigsaw Views</td>
+            <td>Max Jigsaw Exports</td>
+            <td>Show Carrier</td>
+            <td>Show Status Field</td>
+            <td>Test Account</td>
+        </tr>
+    </thead>
+    
+    <tbody data-bind="foreach: filtredUsers">
+        <tr data-bind="click: $parent.openDetails">
+            
+            <td><span data-bind="text: Email"></span></td>
+            <td><span data-bind="text: FirstName"></span></td>
+            <td><span data-bind="text: LastName"></span></td>
+            <td><span data-bind="text: CompanyName"></span></td>
+            @*<td><span data-bind="text: LastLoginDate"></span></td>*@
+            <td><span data-bind="text: States"></span></td>
+            <td><span data-bind="text: ActivationDate"></span></td>
+            @*<td><span data-bind="text: RenewalDate"></span></td>*@
+            <td><span data-bind="text: ExpirationDate"></span></td>
+            <td><span data-bind="text: Admin"></span></td>
+            <td><span data-bind="text: CanexportList"></span></td>
+            <td><span data-bind="text: MaxReportViewsPerMonth"></span></td>
+            <td><span data-bind="text: MaxExports"></span></td>
+            <td><span data-bind="text: MaxJigsawReportsViewsPerMonth"></span></td>
+            <td><span data-bind="text: MaxJigsawExports"></span></td>
+            <td><span data-bind="text: ShowCarrier"></span></td>
+            <td><span data-bind="text: ShowStatusFld"></span></td>
+            <td><span data-bind="text: TestAccount"></span></td>
+        </tr>
+    </tbody>
+</table>
+
+    

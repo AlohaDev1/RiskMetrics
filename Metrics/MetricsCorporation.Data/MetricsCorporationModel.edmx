@@ -1,0 +1,803 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MetricsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MetricsModelStoreContainer">
+          <EntitySet Name="county" EntityType="MetricsModel.Store.county" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="employeesize" EntityType="MetricsModel.Store.employeesize" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="exported" EntityType="MetricsModel.Store.exported" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="exported_company" EntityType="MetricsModel.Store.exported_company" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="jigsaw_logins" EntityType="MetricsModel.Store.jigsaw_logins" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="loginfo" EntityType="MetricsModel.Store.loginfo" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="number_of_logins" EntityType="MetricsModel.Store.number_of_logins" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="role" EntityType="MetricsModel.Store.role" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="searchlog" EntityType="MetricsModel.Store.searchlog" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="usageinfo" EntityType="MetricsModel.Store.usageinfo" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="user" EntityType="MetricsModel.Store.user" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="user_role" EntityType="MetricsModel.Store.user_role" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="user_states" EntityType="MetricsModel.Store.user_states" store:Type="Tables" Schema="state_schematic2" />
+          <EntitySet Name="usercredits" EntityType="MetricsModel.Store.usercredits" store:Type="Tables" Schema="state_schematic2" />
+          <AssociationSet Name="ExportedId" Association="MetricsModel.Store.ExportedId">
+            <End Role="exported" EntitySet="exported" />
+            <End Role="exported_company" EntitySet="exported_company" />
+          </AssociationSet>
+          <AssociationSet Name="roleId" Association="MetricsModel.Store.roleId">
+            <End Role="role" EntitySet="role" />
+            <End Role="user_role" EntitySet="user_role" />
+          </AssociationSet>
+          <AssociationSet Name="user_Id" Association="MetricsModel.Store.user_Id">
+            <End Role="user" EntitySet="user" />
+            <End Role="number_of_logins" EntitySet="number_of_logins" />
+          </AssociationSet>
+          <AssociationSet Name="user_idForein" Association="MetricsModel.Store.user_idForein">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_states" EntitySet="user_states" />
+          </AssociationSet>
+          <AssociationSet Name="userId" Association="MetricsModel.Store.userId">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_role" EntitySet="user_role" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="county">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="state" Type="varchar" MaxLength="2" />
+          <Property Name="selectflag" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="employeesize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="DnB" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="exported">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ExportedOn" Type="datetime" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="RecordsExportedCount" Type="int" />
+          <Property Name="FileName" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="exported_company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="varchar" MaxLength="15" />
+          <Property Name="ExportedId" Type="int" />
+        </EntityType>
+        <EntityType Name="jigsaw_logins">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="login_date" Type="datetime" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="loginfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="password" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="lastloginDate" Type="datetime" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="lastlogoutDate" Type="datetime" />
+          <Property Name="eventtype" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="ReportCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="number_of_logins">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="loginDate" Type="datetime" Nullable="false" />
+          <Property Name="loginCount" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="searchlog">
+          <Key>
+            <PropertyRef Name="qui" />
+          </Key>
+          <Property Name="qui" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="searchname" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="address" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="city" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="state" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="zip" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="SICCode" Type="longtext" Nullable="false" />
+          <Property Name="EffectiveMonth" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="PhoneEmp" Type="bit" Nullable="false" />
+          <Property Name="EmpSizeRange" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="CountyName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ClassCode" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usageinfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="reportid" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="address" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="city" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="state" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="zip" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="zipplus4" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="classcode" Type="int" Nullable="false" />
+          <Property Name="siccode" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="effectivedate" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="carriernum" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="phoneemp" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="contactname" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="empsizerange" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="salesvolrange" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="carriername" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="countyname" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="NAICCarrierNumber" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="NAICGroupName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="createdAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="filePath" Type="varchar" MaxLength="150" />
+          <Property Name="lastloginDate" Type="datetime" />
+          <Property Name="states" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="activationdate" Type="datetime" />
+          <Property Name="renewaldate" Type="datetime" />
+          <Property Name="expirationdate" Type="datetime" />
+          <Property Name="companyName" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="admin" Type="bit" Nullable="false" />
+          <Property Name="canexportlist" Type="bit" Nullable="false" />
+          <Property Name="maxreportviewspermonth" Type="uint" Nullable="false" />
+          <Property Name="maxexports" Type="uint" Nullable="false" />
+          <Property Name="maxjigsawreportsviewspermonth" Type="uint" Nullable="false" />
+          <Property Name="maxjigsawexports" Type="uint" Nullable="false" />
+          <Property Name="showcarrier" Type="bit" Nullable="false" />
+          <Property Name="showstatusfld" Type="bit" Nullable="false" />
+          <Property Name="internalaccount" Type="bit" Nullable="false" />
+          <Property Name="testaccount" Type="bit" Nullable="false" />
+          <Property Name="password" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="firstName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="lastName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="headline" Type="varchar" MaxLength="100" />
+          <Property Name="profilerequest" Type="varchar" />
+          <Property Name="email" Type="varchar" MaxLength="45" />
+          <Property Name="linkedinId" Type="varchar" MaxLength="45" />
+          <Property Name="maxjigsawreportsviewsperyear" Type="uint" Nullable="false" />
+          <Property Name="maxreportviewsperyear" Type="uint" Nullable="false" />
+          <Property Name="reportsViewByMonth" Type="bit" />
+          <Property Name="reportsJigwasByMonth" Type="bit" />
+        </EntityType>
+        <EntityType Name="user_role">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="roleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_states">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="state_name" Type="varchar" Nullable="false" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="usercredits">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="credits" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="ExportedId">
+          <End Role="exported" Type="MetricsModel.Store.exported" Multiplicity="0..1" />
+          <End Role="exported_company" Type="MetricsModel.Store.exported_company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="exported">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="exported_company">
+              <PropertyRef Name="ExportedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="roleId">
+          <End Role="role" Type="MetricsModel.Store.role" Multiplicity="1" />
+          <End Role="user_role" Type="MetricsModel.Store.user_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user_role">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_Id">
+          <End Role="user" Type="MetricsModel.Store.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="number_of_logins" Type="MetricsModel.Store.number_of_logins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="number_of_logins">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_idForein">
+          <End Role="user" Type="MetricsModel.Store.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_states" Type="MetricsModel.Store.user_states" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user_states">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="userId">
+          <End Role="user" Type="MetricsModel.Store.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_role" Type="MetricsModel.Store.user_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user_role">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MetricsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MetricsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="counties" EntityType="MetricsModel.county" />
+          <EntitySet Name="employeesizes" EntityType="MetricsModel.employeesize" />
+          <EntitySet Name="exporteds" EntityType="MetricsModel.exported" />
+          <EntitySet Name="exported_company" EntityType="MetricsModel.exported_company" />
+          <EntitySet Name="jigsaw_logins" EntityType="MetricsModel.jigsaw_logins" />
+          <EntitySet Name="loginfoes" EntityType="MetricsModel.loginfo" />
+          <EntitySet Name="number_of_logins" EntityType="MetricsModel.number_of_logins" />
+          <EntitySet Name="roles" EntityType="MetricsModel.role" />
+          <EntitySet Name="searchlogs" EntityType="MetricsModel.searchlog" />
+          <EntitySet Name="usageinfoes" EntityType="MetricsModel.usageinfo" />
+          <EntitySet Name="users" EntityType="MetricsModel.user" />
+          <EntitySet Name="user_states" EntityType="MetricsModel.user_states" />
+          <EntitySet Name="usercredits" EntityType="MetricsModel.usercredit" />
+          <AssociationSet Name="ExportedId" Association="MetricsModel.ExportedId">
+            <End Role="exported" EntitySet="exporteds" />
+            <End Role="exported_company" EntitySet="exported_company" />
+          </AssociationSet>
+          <AssociationSet Name="user_Id" Association="MetricsModel.user_Id">
+            <End Role="user" EntitySet="users" />
+            <End Role="number_of_logins" EntitySet="number_of_logins" />
+          </AssociationSet>
+          <AssociationSet Name="user_idForein" Association="MetricsModel.user_idForein">
+            <End Role="user" EntitySet="users" />
+            <End Role="user_states" EntitySet="user_states" />
+          </AssociationSet>
+          <AssociationSet Name="user_role" Association="MetricsModel.user_role">
+            <End Role="role" EntitySet="roles" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="county">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="description" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="state" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="selectflag" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="employeesize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DnB" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="exported">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="ExportedOn" />
+          <Property Type="Int32" Name="UserId" />
+          <Property Type="Int32" Name="RecordsExportedCount" />
+          <Property Type="String" Name="FileName" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="exported_company" Relationship="MetricsModel.ExportedId" FromRole="exported" ToRole="exported_company" />
+        </EntityType>
+        <EntityType Name="exported_company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CompanyId" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ExportedId" />
+          <NavigationProperty Name="exported" Relationship="MetricsModel.ExportedId" FromRole="exported_company" ToRole="exported" />
+        </EntityType>
+        <EntityType Name="jigsaw_logins">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="user_id" Nullable="false" />
+          <Property Type="DateTime" Name="login_date" Nullable="false" />
+          <Property Type="Boolean" Name="status" Nullable="false" />
+        </EntityType>
+        <EntityType Name="loginfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="lastloginDate" Nullable="false" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="lastlogoutDate" />
+          <Property Type="String" Name="eventtype" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ReportCount" Nullable="false" />
+        </EntityType>
+        <EntityType Name="number_of_logins">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="userId" Nullable="false" />
+          <Property Type="DateTime" Name="loginDate" Nullable="false" />
+          <Property Type="Int64" Name="loginCount" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="MetricsModel.user_Id" FromRole="number_of_logins" ToRole="user" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="users" Relationship="MetricsModel.user_role" FromRole="role" ToRole="user" />
+        </EntityType>
+        <EntityType Name="searchlog">
+          <Key>
+            <PropertyRef Name="qui" />
+          </Key>
+          <Property Type="Int32" Name="qui" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="searchname" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="description" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="address" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="city" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="state" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="zip" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SICCode" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EffectiveMonth" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="PhoneEmp" Nullable="false" />
+          <Property Type="String" Name="EmpSizeRange" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CountyName" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="String" Name="ClassCode" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="usageinfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="reportid" Nullable="false" />
+          <Property Type="String" Name="description" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="address" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="city" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="state" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="zip" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="zipplus4" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="classcode" Nullable="false" />
+          <Property Type="Int32" Name="siccode" Nullable="false" />
+          <Property Type="String" Name="status" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="effectivedate" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="carriernum" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="phoneemp" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="contactname" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="empsizerange" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="salesvolrange" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="carriername" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="countyname" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NAICCarrierNumber" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NAICGroupName" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="createdAt" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="filePath" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="lastloginDate" />
+          <Property Type="String" Name="states" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="activationdate" />
+          <Property Type="DateTime" Name="renewaldate" />
+          <Property Type="DateTime" Name="expirationdate" />
+          <Property Type="String" Name="companyName" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="admin" Nullable="false" />
+          <Property Type="Boolean" Name="canexportlist" Nullable="false" />
+          <Property Type="Int64" Name="maxreportviewspermonth" Nullable="false" />
+          <Property Type="Int64" Name="maxexports" Nullable="false" />
+          <Property Type="Int64" Name="maxjigsawreportsviewspermonth" Nullable="false" />
+          <Property Type="Int64" Name="maxjigsawexports" Nullable="false" />
+          <Property Type="Boolean" Name="showcarrier" Nullable="false" />
+          <Property Type="Boolean" Name="showstatusfld" Nullable="false" />
+          <Property Type="Boolean" Name="internalaccount" Nullable="false" />
+          <Property Type="Boolean" Name="testaccount" Nullable="false" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="firstName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="lastName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="headline" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="profilerequest" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="email" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="linkedinId" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="maxjigsawreportsviewsperyear" Nullable="false" />
+          <Property Type="Int64" Name="maxreportviewsperyear" Nullable="false" />
+          <Property Type="Boolean" Name="reportsViewByMonth" />
+          <Property Type="Boolean" Name="reportsJigwasByMonth" />
+          <NavigationProperty Name="number_of_logins" Relationship="MetricsModel.user_Id" FromRole="user" ToRole="number_of_logins" />
+          <NavigationProperty Name="user_states" Relationship="MetricsModel.user_idForein" FromRole="user" ToRole="user_states" />
+          <NavigationProperty Name="roles" Relationship="MetricsModel.user_role" FromRole="user" ToRole="role" />
+        </EntityType>
+        <EntityType Name="user_states">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="userId" Nullable="false" />
+          <Property Type="String" Name="state_name" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user" Relationship="MetricsModel.user_idForein" FromRole="user_states" ToRole="user" />
+        </EntityType>
+        <EntityType Name="usercredit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="user_id" Nullable="false" />
+          <Property Type="Int32" Name="credits" Nullable="false" />
+        </EntityType>
+        <Association Name="ExportedId">
+          <End Type="MetricsModel.exported" Role="exported" Multiplicity="0..1" />
+          <End Type="MetricsModel.exported_company" Role="exported_company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="exported">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="exported_company">
+              <PropertyRef Name="ExportedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_Id">
+          <End Type="MetricsModel.user" Role="user" Multiplicity="1" />
+          <End Type="MetricsModel.number_of_logins" Role="number_of_logins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="number_of_logins">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_idForein">
+          <End Type="MetricsModel.user" Role="user" Multiplicity="1" />
+          <End Type="MetricsModel.user_states" Role="user_states" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user_states">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_role">
+          <End Type="MetricsModel.role" Role="role" Multiplicity="*" />
+          <End Type="MetricsModel.user" Role="user" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MetricsModelStoreContainer" CdmEntityContainer="MetricsEntities">
+          <EntitySetMapping Name="counties">
+            <EntityTypeMapping TypeName="MetricsModel.county">
+              <MappingFragment StoreEntitySet="county">
+                <ScalarProperty Name="selectflag" ColumnName="selectflag" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employeesizes">
+            <EntityTypeMapping TypeName="MetricsModel.employeesize">
+              <MappingFragment StoreEntitySet="employeesize">
+                <ScalarProperty Name="DnB" ColumnName="DnB" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="exporteds">
+            <EntityTypeMapping TypeName="MetricsModel.exported">
+              <MappingFragment StoreEntitySet="exported">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="RecordsExportedCount" ColumnName="RecordsExportedCount" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ExportedOn" ColumnName="ExportedOn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="exported_company">
+            <EntityTypeMapping TypeName="MetricsModel.exported_company">
+              <MappingFragment StoreEntitySet="exported_company">
+                <ScalarProperty Name="ExportedId" ColumnName="ExportedId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jigsaw_logins">
+            <EntityTypeMapping TypeName="MetricsModel.jigsaw_logins">
+              <MappingFragment StoreEntitySet="jigsaw_logins">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="login_date" ColumnName="login_date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="loginfoes">
+            <EntityTypeMapping TypeName="MetricsModel.loginfo">
+              <MappingFragment StoreEntitySet="loginfo">
+                <ScalarProperty Name="ReportCount" ColumnName="ReportCount" />
+                <ScalarProperty Name="eventtype" ColumnName="eventtype" />
+                <ScalarProperty Name="lastlogoutDate" ColumnName="lastlogoutDate" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="lastloginDate" ColumnName="lastloginDate" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="number_of_logins">
+            <EntityTypeMapping TypeName="MetricsModel.number_of_logins">
+              <MappingFragment StoreEntitySet="number_of_logins">
+                <ScalarProperty Name="loginCount" ColumnName="loginCount" />
+                <ScalarProperty Name="loginDate" ColumnName="loginDate" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="MetricsModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="searchlogs">
+            <EntityTypeMapping TypeName="MetricsModel.searchlog">
+              <MappingFragment StoreEntitySet="searchlog">
+                <ScalarProperty Name="ClassCode" ColumnName="ClassCode" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CountyName" ColumnName="CountyName" />
+                <ScalarProperty Name="EmpSizeRange" ColumnName="EmpSizeRange" />
+                <ScalarProperty Name="PhoneEmp" ColumnName="PhoneEmp" />
+                <ScalarProperty Name="EffectiveMonth" ColumnName="EffectiveMonth" />
+                <ScalarProperty Name="SICCode" ColumnName="SICCode" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="searchname" ColumnName="searchname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="qui" ColumnName="qui" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usageinfoes">
+            <EntityTypeMapping TypeName="MetricsModel.usageinfo">
+              <MappingFragment StoreEntitySet="usageinfo">
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="NAICGroupName" ColumnName="NAICGroupName" />
+                <ScalarProperty Name="NAICCarrierNumber" ColumnName="NAICCarrierNumber" />
+                <ScalarProperty Name="countyname" ColumnName="countyname" />
+                <ScalarProperty Name="carriername" ColumnName="carriername" />
+                <ScalarProperty Name="salesvolrange" ColumnName="salesvolrange" />
+                <ScalarProperty Name="empsizerange" ColumnName="empsizerange" />
+                <ScalarProperty Name="contactname" ColumnName="contactname" />
+                <ScalarProperty Name="phoneemp" ColumnName="phoneemp" />
+                <ScalarProperty Name="carriernum" ColumnName="carriernum" />
+                <ScalarProperty Name="effectivedate" ColumnName="effectivedate" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="siccode" ColumnName="siccode" />
+                <ScalarProperty Name="classcode" ColumnName="classcode" />
+                <ScalarProperty Name="zipplus4" ColumnName="zipplus4" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="reportid" ColumnName="reportid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="MetricsModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="reportsJigwasByMonth" ColumnName="reportsJigwasByMonth" />
+                <ScalarProperty Name="reportsViewByMonth" ColumnName="reportsViewByMonth" />
+                <ScalarProperty Name="maxreportviewsperyear" ColumnName="maxreportviewsperyear" />
+                <ScalarProperty Name="maxjigsawreportsviewsperyear" ColumnName="maxjigsawreportsviewsperyear" />
+                <ScalarProperty Name="linkedinId" ColumnName="linkedinId" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="profilerequest" ColumnName="profilerequest" />
+                <ScalarProperty Name="headline" ColumnName="headline" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="testaccount" ColumnName="testaccount" />
+                <ScalarProperty Name="internalaccount" ColumnName="internalaccount" />
+                <ScalarProperty Name="showstatusfld" ColumnName="showstatusfld" />
+                <ScalarProperty Name="showcarrier" ColumnName="showcarrier" />
+                <ScalarProperty Name="maxjigsawexports" ColumnName="maxjigsawexports" />
+                <ScalarProperty Name="maxjigsawreportsviewspermonth" ColumnName="maxjigsawreportsviewspermonth" />
+                <ScalarProperty Name="maxexports" ColumnName="maxexports" />
+                <ScalarProperty Name="maxreportviewspermonth" ColumnName="maxreportviewspermonth" />
+                <ScalarProperty Name="canexportlist" ColumnName="canexportlist" />
+                <ScalarProperty Name="admin" ColumnName="admin" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="expirationdate" ColumnName="expirationdate" />
+                <ScalarProperty Name="renewaldate" ColumnName="renewaldate" />
+                <ScalarProperty Name="activationdate" ColumnName="activationdate" />
+                <ScalarProperty Name="states" ColumnName="states" />
+                <ScalarProperty Name="lastloginDate" ColumnName="lastloginDate" />
+                <ScalarProperty Name="filePath" ColumnName="filePath" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_states">
+            <EntityTypeMapping TypeName="MetricsModel.user_states">
+              <MappingFragment StoreEntitySet="user_states">
+                <ScalarProperty Name="state_name" ColumnName="state_name" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usercredits">
+            <EntityTypeMapping TypeName="MetricsModel.usercredit">
+              <MappingFragment StoreEntitySet="usercredits">
+                <ScalarProperty Name="credits" ColumnName="credits" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="user_role" TypeName="MetricsModel.user_role" StoreEntitySet="user_role">
+            <EndProperty Name="user">
+              <ScalarProperty Name="id" ColumnName="userId" />
+            </EndProperty>
+            <EndProperty Name="role">
+              <ScalarProperty Name="id" ColumnName="roleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="MetricsCorporationModel" ZoomLevel="74">
+        <EntityTypeShape EntityType="MetricsModel.county" Width="1.5" PointX="7.75" PointY="4.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="MetricsModel.employeesize" Width="1.5" PointX="7.75" PointY="7.75" Height="1.5956835937500102" />
+        <EntityTypeShape EntityType="MetricsModel.exported" Width="1.5" PointX="7.75" PointY="0.875" Height="2.172587890624996" />
+        <EntityTypeShape EntityType="MetricsModel.exported_company" Width="1.5" PointX="10" PointY="1.125" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="MetricsModel.jigsaw_logins" Width="1.5" PointX="0.75" PointY="9.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="MetricsModel.loginfo" Width="1.5" PointX="2.75" PointY="9.75" Height="2.7494921875000102" />
+        <EntityTypeShape EntityType="MetricsModel.number_of_logins" Width="1.5" PointX="5.25" PointY="2.625" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="MetricsModel.role" Width="1.5" PointX="0.75" PointY="4.125" Height="1.595683593749996" />
+        <EntityTypeShape EntityType="MetricsModel.searchlog" Width="1.5" PointX="9.75" PointY="3.75" Height="3.9033007812500102" />
+        <EntityTypeShape EntityType="MetricsModel.usageinfo" Width="1.5" PointX="4.75" PointY="9.75" Height="5.63401367187501" />
+        <EntityTypeShape EntityType="MetricsModel.user" Width="1.5" PointX="3" PointY="1.25" Height="7.3647265625000093" />
+        <EntityTypeShape EntityType="MetricsModel.user_states" Width="1.5" PointX="5.25" PointY="5.375" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="MetricsModel.usercredit" Width="1.5" PointX="9.75" PointY="8.75" Height="1.5956835937499818" />
+        <AssociationConnector Association="MetricsModel.ExportedId" >
+          <ConnectorPoint PointX="9.25" PointY="2.0189925130208337" />
+          <ConnectorPoint PointX="10" PointY="2.0189925130208337" />
+        </AssociationConnector>
+        <AssociationConnector Association="MetricsModel.user_Id" >
+          <ConnectorPoint PointX="4.5" PointY="3.6151432291666623" />
+          <ConnectorPoint PointX="5.25" PointY="3.6151432291666623" />
+        </AssociationConnector>
+        <AssociationConnector Association="MetricsModel.user_idForein" >
+          <ConnectorPoint PointX="4.5" PointY="6.2689925130208337" />
+          <ConnectorPoint PointX="5.25" PointY="6.2689925130208337" />
+        </AssociationConnector>
+        <AssociationConnector Association="MetricsModel.user_role" >
+          <ConnectorPoint PointX="2.25" PointY="4.922841796874998" />
+          <ConnectorPoint PointX="3" PointY="4.922841796874998" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

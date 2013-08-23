@@ -1,0 +1,103 @@
+﻿<#@ template language="C#" hostspecific="True" debug="True" #>
+<#@ include file="EF.Utility.CS.ttinclude"#>
+<#@ include file="T4Toolbox.tt" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+
+<#
+
+string inputFile = @"MetricsCorporationModel.edmx";
+
+var loader = new MetadataLoader(this);
+var Code = new CodeGenerationTools(this);
+var EFTools = new MetadataTools(this);
+var ObjectNamespace = Code.VsNamespaceSuggestion();
+var ModelNamespace = loader.GetModelNamespace(inputFile);
+var itemCollection = loader.CreateEdmItemCollection(inputFile);
+var container = itemCollection.GetItems<EntityContainer>().FirstOrDefault();
+var prefix = "MetricsCorporation";
+
+
+
+//Debugger.Break();
+
+if (container == null)
+{
+    return string.Empty;
+}
+#>
+/************************************************************
+*
+*	UnitOfWork module generated from MetricsCorporationModel.edmx
+*
+*   Usage Reference 
+*	http://www.asp.net/mvc/tutorials/getting-started-with-ef-using-mvc/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application
+*
+*************************************************************/
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using MetricsCorporation.EFCore.Repository;
+
+<#
+if (container.FunctionImports.Any())
+{
+#>
+using System.Data.Objects;
+<#
+}
+
+if (!String.IsNullOrEmpty(ObjectNamespace))
+{
+#>
+namespace <#=Code.EscapeNamespace(ObjectNamespace)#>
+{
+<#
+    PushIndent(CodeRegion.GetIndent(1));
+}
+
+#>
+
+public partial class MetricsCorporationUnitOfWork 
+{
+<#
+    PushIndent(CodeRegion.GetIndent(1));
+#>
+private <#=Code.Escape(container)#> _context = new <#=Code.Escape(container)#>();
+<#  
+	foreach (var entity in itemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+	{
+#>
+private <#= Code.Escape(entity)#>Repository _<#= Code.Escape(entity).ToLower()#> = null;
+<# 
+	}
+
+	foreach (var entity in itemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+	{
+#>
+
+public <#= Code.Escape(entity)#>Repository <#= Code.Escape(entity)#>Repository
+{
+	get
+    {
+		if (_<#= Code.Escape(entity).ToLower()#> == null)
+        {
+        	_<#= Code.Escape(entity).ToLower()#> = new <#= Code.Escape(entity)#>Repository(_context);
+        }
+        return _<#= Code.Escape(entity).ToLower()#>;
+    }
+}
+<# 
+	}
+	PopIndent();
+#>
+}
+<#
+	PopIndent();
+#>
+}

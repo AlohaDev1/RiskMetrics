@@ -1,0 +1,44 @@
+﻿<#+ 
+public class BaseTemplate : Template
+{
+	public string Namespace 
+	{
+		get { return _namespaceName;}
+		set { _namespaceName = value;}
+	}
+	
+	protected string _namespaceName;
+	protected CodeGenerationTools _code {get;set;}
+	
+	public BaseTemplate(){}
+	
+	public override string TransformText()
+	{
+		return string.Empty;
+	}
+	
+	protected void BeginNamespace()
+	{
+	    CodeRegion region = new CodeRegion(this);
+	    if (!String.IsNullOrEmpty(_namespaceName))
+	    {
+#>
+namespace <#=_code.EscapeNamespace(_namespaceName)#>
+{
+<#+
+	        PushIndent(CodeRegion.GetIndent(1));
+    	}
+	}
+
+	protected void EndNamespace()
+	{
+	    if (!String.IsNullOrEmpty(_namespaceName))
+	    {
+	        PopIndent();
+#>
+}
+<#+
+    	}
+	}
+}
+#>

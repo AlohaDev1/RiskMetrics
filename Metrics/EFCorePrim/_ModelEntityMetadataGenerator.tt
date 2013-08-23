@@ -1,0 +1,215 @@
+﻿<#+
+// <copyright file="_ModelEntityMetadataGenerator">
+//  Copyright © ... All Rights Reserved.
+// </copyright>
+
+public class _ModelEntityMetadataGenerator : BaseTemplate
+{
+	private EntityType _entity;
+	private EntityContainer _container;
+		
+	private string _entityName;	 	
+	private string _className;
+	
+	private List<string> excludeMandatoryFields = new List<string>()
+		{ "active", "deleted"};
+
+	
+	public void InitGeneratorTemplate(EntityType entity, EntityContainer container, CodeGenerationTools code)
+	{
+		_entity = entity;
+		_code = code;
+		_container = container;
+		_entityName = _code.Escape(_entity);
+		_className = string.Format("{0}Metadata", _entityName);
+
+		this.Output.File = string.Format("Metadata\\Generated\\{0}.Generated.cs", _className);			
+	}	
+	
+	public override string TransformText()
+	{
+#>//-------------------------------------------------------------------------------------------------
+//    Metadata class
+//    Hisory Changes:
+//
+//    2011/10/29
+//    - generate PrimaryKey property
+//    - define strong typed PropertyNames 
+//-------------------------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using MetricsCorporation.Infrastructure.Interfaces;
+
+<#+    BeginNamespace();
+#>
+
+<#=Accessibility.ForType(_entity)#> <#=_code.SpaceAfter(_code.AbstractOption(_entity))#>partial class <#=_className#> : IEntityMetadata
+{	
+<#+
+		WritePrimaryKeyProperty(_code, _entity);
+
+		WriteRequiredProperty(_code, _entity);
+
+		WriteAllProperty(_code, _entity);
+
+		WriteStrongTypedClassPropertyNames(_code, _entity);		
+#>
+
+}
+<#+ 
+    	EndNamespace();
+		return this.GenerationEnvironment.ToString();
+	}
+	
+	void WriteStrongTypedClassPropertyNames(CodeGenerationTools code, EntityType entity)
+	{	
+#>	/// <summary>
+    /// Strong typed property names
+    /// </summary>
+    #region Property Names Metadata
+<#+
+	    foreach (var property in entity.Properties.OrderBy(x=>x.Name))
+		{
+#>
+	public string <#=code.Escape(property)#>PropertyName 
+	{
+	    get { return "<#=property#>";}
+		set { throw new NotSupportedException(); }
+    }
+<#+
+		}
+#>
+<#+     
+		foreach (var propertyNav in entity.NavigationProperties)
+		{
+#>
+	public string <#=code.Escape(propertyNav)#>PropertyName
+	{
+	    get { return "<#=propertyNav#>";}
+		set { throw new NotSupportedException(); }
+    }
+<#+
+		}
+#>
+	#endregion
+<#+ 
+	}
+	
+	void WritePrimaryKeyProperty(CodeGenerationTools code, EntityType entity)
+	{
+#>    /// <summary>
+    /// Returns primary key as List
+    /// </summary>
+	public List<string> PrimaryKey
+	{
+        get
+		{
+            List<string> pk = new List<string>();
+            pk.AddRange(
+                new string[] {					
+<#+
+    		foreach (var member in entity.KeyMembers.OrderBy(x=>x.Name))
+			{
+				string delim = "";
+#>
+		    		<#=delim#> <#=code.Escape(member.Name)#>PropertyName
+<#+
+				delim=",";
+			}
+#>				});
+            return pk;
+        }
+    }
+	
+<#+
+	}
+
+	void WriteRequiredProperty(CodeGenerationTools code, EntityType entity)
+	{
+		
+		//System.Diagnostics.Debugger.Launch();
+		//System.Diagnostics.Debugger.Break();
+		var primitiveProperties = entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && !p.Nullable);
+	    if (primitiveProperties.Any())
+		{
+#>    /// <summary>
+    /// Returns primary key as List
+    /// </summary>
+	public List<string> MandatoryFields
+	{
+        get
+		{
+            List<string> pk = new List<string>();
+            pk.AddRange(
+                new string[] {					
+<#+
+			string delim = "";
+    		foreach (var member in primitiveProperties.OrderBy(x=>x.Name))
+			{
+				var useField = true;
+				if (excludeMandatoryFields.Count !=0)
+					useField = excludeMandatoryFields.FirstOrDefault(x=>x == member.Name.ToLower())==null;
+				if (useField)
+				{
+#>
+		    		<#=delim#> <#=code.Escape(member.Name)#>PropertyName
+<#+
+					delim=",";
+				}
+			}
+#>				});
+            return pk;
+        }
+    }
+	
+<#+
+		}
+	}
+
+	void WriteAllProperty(CodeGenerationTools code, EntityType entity)
+	{		
+		//System.Diagnostics.Debugger.Launch();
+		//System.Diagnostics.Debugger.Break();
+		var primitiveProperties = entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity);
+	    if (primitiveProperties.Any())
+		{
+#>    /// <summary>
+    /// Returns primary key as List
+    /// </summary>
+	public Dictionary<string, string> Fields
+	{
+        get
+		{
+            Dictionary<string, string> pk = new Dictionary<string, string>();
+<#+
+			string mandatory;
+			foreach (var member in primitiveProperties.OrderBy(x=>x.Name))
+			{
+				mandatory = "Optional";
+
+				if (!member.Nullable)
+				{
+					var useField = true;
+					if (excludeMandatoryFields.Count !=0)
+						useField = excludeMandatoryFields.FirstOrDefault(x=>x == member.Name.ToLower())==null;
+					if (useField)
+						mandatory = "Mandatory";
+				}
+#>
+			pk.Add(<#=code.Escape(member.Name)#>PropertyName, "<#= mandatory #>");
+<#+
+				}
+			}
+#>
+            return pk;
+        }
+    }
+	
+<#+
+	}
+}
+#>
+
+

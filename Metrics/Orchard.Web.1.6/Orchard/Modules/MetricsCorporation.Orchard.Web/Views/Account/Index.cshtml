@@ -1,0 +1,59 @@
+﻿@using Orchard.UI.Resources
+@{
+    ViewBag.Title = "My Account";
+    
+}
+@{
+    Script.Require("jQuery").AtLocation(ResourceLocation.Head);
+
+    Script.Include("native.history.js").AtLocation(ResourceLocation.Head);
+    Script.Include("knockout-2.2.0.debug.js").AtLocation(ResourceLocation.Head);
+    Script.Include("knockout.navigation.js").AtLocation(ResourceLocation.Head);
+    Script.Include("knockout.validation.js").AtLocation(ResourceLocation.Head);
+
+    Style.Include("kendo.common.min.css").AtLocation(ResourceLocation.Head);
+    Style.Include("kendo.default.min.css").AtLocation(ResourceLocation.Head);
+    Style.Include("Main.css").AtLocation(ResourceLocation.Head);
+
+    //Style.Include("//platform.linkedin.com/in.js").AtLocation(ResourceLocation.Head);
+    <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+    
+    Script.Include("jquery.blockUI.js").AtLocation(ResourceLocation.Head);
+    Script.Include("./kendo/kendo.all.min.js").AtLocation(ResourceLocation.Head);
+    Script.Include("jquery.tmpl.js").AtLocation(ResourceLocation.Head);
+    Script.Include("./kendo/knockout-kendo.min.js").AtLocation(ResourceLocation.Head);
+    Script.Include("date.js").AtLocation(ResourceLocation.Head);
+    //Script.Include("jquery-bootstrap-pagination.js").AtLocation(ResourceLocation.Head);
+    Script.Include("bootstrap-pagination.js").AtLocation(ResourceLocation.Head);
+
+
+    Script.Include("./account/DataSources.js").AtLocation(ResourceLocation.Head);
+    Script.Include("./helpers/KoBindings.js").AtLocation(ResourceLocation.Head);
+    Script.Include("./account/AccountModel.js").AtLocation(ResourceLocation.Head);
+    Script.Include("./account/ShellModel.js").AtLocation(ResourceLocation.Head);
+
+    
+     @*<script type="text/javascript" src="https://www.google.com/jsapi"></script>*@
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        ko.navigation.setNamespace(MetricsCorporationApp);
+
+        var myapp = new MetricsCorporationApp.ShellModel();
+        myapp.init();
+        ko.applyBindings(myapp);
+
+        //for debug
+        window.vm = myapp;
+    });
+</script>
+
+<script id="AccountModelView" type="text/html">
+     @Html.Partial("_AccountPartial")
+</script>
+
+<div class="content" data-bind="navigation: navigation">
+   
+    
+    
+</div>

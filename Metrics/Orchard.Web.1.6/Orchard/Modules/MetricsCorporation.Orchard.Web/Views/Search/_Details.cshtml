@@ -1,0 +1,182 @@
+﻿@model MetricsCorporation.Models.CompanyModel
+<div id="companyReport" class="drop-shadow curved-hz-2">
+    <div class="row" style="min-height: 520px;">
+        <div class="span11">
+            <div class="span6">
+                <h2 data-bind="text: CompanyName">
+                </h2>
+                <table class="table">
+                    <tr>
+                        <td>
+                            Company Name:
+                        </td>
+                        <td>
+                            <span data-bind="text: CompanyName"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Address):
+                        </td>
+                        <td>
+                            <span data-bind="text: Address"></span>,&nbsp; <span data-bind="text: City"></span>
+                            ,&nbsp; <span data-bind="text: State"></span>,&nbsp; <span data-bind="text: Zip">
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.County):
+                        </td>
+                        <td>
+                            <span data-bind="text: County"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Phone):
+                        </td>
+                        <td>
+                            <span data-bind="text: Phone"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Policy Renewal Date(MM/DD):
+                        </td>
+                        <td>
+                            <span data-bind="text: PolicyRenewalDate"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Employee Size:
+                        </td>
+                        <td>
+                            <span data-bind="text: EmployeeSize"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Carrier Of Record:
+                        </td>
+                        <td>
+                            <span data-bind="text: CarrierOfRecord"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Carrier Group Name:
+                        </td>
+                        <td>
+                            <span data-bind="text: CarrierGroupName"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Contact Name:
+                        </td>
+                        <td>
+                            <span data-bind="text: ContactName"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.SicCode):
+                        </td>
+                        <td>
+                            <span data-bind="text: SicCode"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Class Code:
+                        </td>
+                        <td>
+                            <span data-bind="text: ClassCode"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Status):
+                        </td>
+                        <td>
+                            <span data-bind="text: Status"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Additional Info:
+                        </td>
+                        <td>
+                            <div id="AdditionalInfo" data-bind="html: AdditionalInfo">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Rank Record
+                        </td>
+                        <td>
+                            <div id="divRankBar">
+                                <input class="rankBar" />
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn" style="margin-top: -10px;" data-bind="click: rankRecord">
+                                Rank</button>
+                        </td>
+                    </tr>
+                </table>
+                <button class="btn" style="margin-bottom: 15px;" data-bind="click: get_companyContacts">
+                    <i class=" icon-user"></i>Get Company Contacts</button>
+            </div>
+            <div class="span4">
+                @* @Html.Partial("_Map")*@
+                <div id="GMap" data-bind="style:{width:'400px',height:'350px'} ,Googlemap:companymarker">
+                </div>
+                <div id="linkedInProfile" style="float: left; width: 400px">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span11">
+            <div id="contactsGrid" data-bind="kendoGrid: contacts, gridOptions: contactsGridOptions"
+                style="width: 1020px; display: block; float: left; margin-left: 30px;" />
+        </div>
+    </div>
+    <div class="row" style="margin-left: 30px;">
+        <div class="row">
+            <div class="span3" style="padding: 10px 0px;">
+                <button class="btn btn-large" data-bind="click: $root.toggleExportDialog">
+                    <i class=" icon-hdd"></i>Export</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span5" style="padding: 10px 0px;">
+                <button class="btn" data-bind="click: backToSearchResults">
+                    <i class=" icon-arrow-left"></i>Back to search results</button>
+                <button class="btn" data-bind="click: goToSearchView">
+                    <i class=" icon-arrow-right"></i>Start New Search »</button>
+            </div>
+        </div>
+    </div>
+    <div data-bind="kendoWindow: { isOpen: isDetailsOpen, visible: false, actions: ['Close', 'Minimize', 'Maximize', 'Refresh'], modal: true, width: '400px', height: '300px' }"
+        id="detalsWindow">
+        <ul style="float: left;">
+            <li><a href="#" data-bind="click: DownloadUserXml">Download File</a></li>
+            <li>
+                <h1>
+                    User Information</h1>
+            </li>
+            <li>Title: &nbsp;&nbsp;&nbsp; <span data-bind="text: userTitle"></span></li>
+            <li>Graveyard Status: &nbsp;&nbsp;<span data-bind="text: graveyardStatus"></span></li>
+            <li>First Name: &nbsp;&nbsp;<span data-bind="text: firstname"></span></li>
+            <li>Last Name: &nbsp;&nbsp;&nbsp;<span data-bind="text: lastname"></span> </li>
+            <li>City: &nbsp;&nbsp;&nbsp;<span data-bind="text: city"></span> </li>
+            <li>State: &nbsp;&nbsp;&nbsp;<span data-bind="text: state"></span> </li>
+            <li>Country: &nbsp;&nbsp;&nbsp;<span data-bind="text: country"></span> </li>
+            <li>Zip: &nbsp;&nbsp;&nbsp;<span data-bind="text: zip"></span> </li>
+            <li>Area Code: &nbsp;&nbsp;&nbsp;<span data-bind="text: areaCode"></span> </li>
+            <li>Phone: &nbsp;&nbsp;&nbsp;<span data-bind="text: phone"></span> </li>
+            <li>Email: &nbsp;&nbsp;&nbsp;<span data-bind="text: email"></span> </li>
+            <li>Address: &nbsp;&nbsp;&nbsp;<span data-bind="text: address"></span> </li>
+        </ul>
+    </div>
+</div>

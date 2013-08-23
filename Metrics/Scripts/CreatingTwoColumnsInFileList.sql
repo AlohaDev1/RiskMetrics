@@ -1,0 +1,1 @@
+ALTER TABLE `state_schematic`.`filelist` ADD COLUMN `canexportlist` BIT(1) NOT NULL  AFTER `admin` , ADD COLUMN `maxreportviewspermonth` INT NOT NULL  AFTER `canexportlist` ;

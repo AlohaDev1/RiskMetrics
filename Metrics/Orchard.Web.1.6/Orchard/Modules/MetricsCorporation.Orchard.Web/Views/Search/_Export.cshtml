@@ -1,0 +1,58 @@
+﻿<div id="exportDialog" class="modal hide fade " style="text-align: center; width: 600px;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" data-bind="click: toggleExportDialog">
+            &times;</button>
+        <h3>
+            Export List</h3>
+    </div>
+    <div class="modal-body">
+        <div class="exportStep1">
+            <h4>
+                Are you sure you want to download <span data-bind="text: exportCounts">1</span> record(s)?</h4>
+            <h4>
+                If Yes then please specify the name you want to save the file as.</h4>
+            <p>
+            
+                <div class="control-group"  style="margin-top: 50px;">
+                    <label class="control-label" for="saveFileName" style="display: inline-block;vertical-align: middle;">Save as:</label>
+                
+                    <input id="saveFileName" data-bind="value: saveFileName" type="text" placeholder="Enter file name to save..." style="width: 60%;" />
+                
+                </div>
+            </p>
+            <p>If you need support please call 800-283-7798</p>
+        </div>
+        <div class="exportStep2" style="display: none;">
+            <p>Please Click on the icon to Download:</p>
+            <p>
+                <img src="@Href("~/Modules/MetricsCorporation.Orchard.Web/Styles/images/export2csv.png")" alt="csv" class="csv-export" data-bind="click: exportItems" style="cursor:pointer;" />
+                <img src="@Href("~/Modules/MetricsCorporation.Orchard.Web/Styles/images/export2xml.png")" alt="xml" class="xml-export" data-bind="click: exportItems" style="cursor:pointer;" />
+            </p>
+            <p>If you need support please call 800-283-7798</p>
+        </div>
+        
+        <h3 class="exportError textError" style="display: none; color: red; ">
+            You have reached your limit for exporting records.
+
+ Your contract allows you to export 5000 records
+
+ You have exported (excluding current request) 44 records
+
+ Your current request is for 17422 records
+        </h3>
+    </div>
+    <div class="modal-footer" style="text-align: center">
+        <div class="exportStep1">
+            <button class="btn btn-large btn-success" data-bind="click: goToStep2">Yes</button>
+            <button class="btn btn-large btn-danger" data-bind="click: toggleExportDialog">No</button>
+        </div>
+        <div class="exportStep2" style="display: none;">
+            <button class="btn btn-large" data-bind="click: toggleExportDialog">Close</button>
+        </div>
+        
+        <div class="exportError" style="display: none;">
+              <button class="btn btn-large" data-bind="click: toggleExportDialog">Close</button>
+        </div>
+    </div>
+    <form method="post" action="" id ="exportForm" style='visibility:hidden;'></form>
+</div>

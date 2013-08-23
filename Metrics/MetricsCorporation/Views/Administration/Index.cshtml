@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Index";
+
+}
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/admin/DataSources.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/helpers/KoBindings.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/app/MasterIdItemModel.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/admin/AdminModel.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/admin/FileListModel.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/admin/MasterIdModel.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        ko.navigation.setNamespace(MetricsCorporationApp);
+
+        var myapp = new MetricsCorporationApp.AdminModel();
+        myapp.init();
+        ko.applyBindings(myapp);
+
+        //for debug
+        window.vm = myapp;
+    });
+</script>
+
+<nav><a href="#" data-bind="click: goToFileListView">File List</a> | <a href="#" data-bind="click: goToMasterIdView">Master Id</a></nav>
+<script id="FileListView" type="text/html">
+    @Html.Partial("_FileList")
+    @Html.Partial("_FileDetails")
+</script>
+
+<script id="MasterIdView" type="text/html">
+    @Html.Partial("_MasterId")
+    @Html.Partial("_MasterIdDetails")
+</script>
+<div class="content" data-bind="navigation: navigation">
+</div>
+
+@*<script id="delete-confirmation" type="text/x-kendo-template">
+    <p class="delete-message">Are you sure?</p>
+
+    <button class="delete-confirm k-button">Yes</button>
+    <a href="#" class="delete-cancel">No</a>
+</script>​*@

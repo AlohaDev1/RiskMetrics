@@ -1,0 +1,38 @@
+﻿@model MetricsCorporation.Models.SearchModel
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/app/DataSources.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/helpers/KoBindings.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/app/SearchModel.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/app/DataGridViewModel.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/app/ShellModel.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        ko.navigation.setNamespace(MetricsCorporationApp);
+        ko.validation.rules.pattern.message = 'Invalid.';
+
+        ko.validation.configure({
+            registerExtenders: true,
+            messagesOnModified: true,
+            insertMessages: true,
+            parseInputAttributes: true,
+            messageTemplate: null
+        });
+
+        var myapp = new MetricsCorporationApp.ShellModel();
+        myapp.init();
+        ko.applyBindings(myapp);
+    });
+</script>
+<script type="text/html" id="SearchView">
+    @Html.Partial("_Search")
+</script>
+<script id="DataGridView" type="text/html">
+    @Html.Partial("_Details")
+    @Html.Partial("_Grid")
+</script>
+<div id="window">
+</div>
+<div class="content" data-bind="navigation: navigation">
+</div>

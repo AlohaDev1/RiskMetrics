@@ -1,0 +1,75 @@
+﻿@model MetricsCorporation.Models.SearchModel
+<div id="example">
+    <div class="k-widget k-header" style="height: 600px; border-bottom: none">
+        <div style="float: left; display: block">
+            <h3>
+                Top 10 Searches</h3>
+            <ul data-bind="foreach: topsearches">
+                <li>
+                    <div>
+                        Search Name : <span data-bind="text: SearchName"></span><a href="#" data-bind="click: $parent.goTosearch">
+                            Go to search</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul style="float: left; display: block; width: 700px">
+            <li>
+                @Html.LabelFor(model => model.CompanyName)
+                <input data-bind="kendoAutoComplete: { dataTextField: 'Description', dataValueField: 'Id', data: combs, value: companyInput }"
+                       style="width: 400px" /><span class="validationMessage" data-bind="validationMessage: companyInput"></span>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.City)
+                <input class="k-textbox" id="City" name="City" type="text" value="" data-bind="value: cityInput" />
+            </li>
+            <li>
+                @Html.LabelFor(model => model.State)
+                <input class="k-textbox" id="State" name="State" type="text" value="" data-bind="value: stateInput" />
+            </li>
+            <li>
+                @Html.LabelFor(model => model.Zip)
+                <input class="k-textbox" id="Zip" name="Zip" type="text" value="" data-bind="value: zipInput" />
+            </li>
+            <li>
+                @Html.LabelFor(model => model.CountyName)
+                <input data-bind="kendoAutoComplete: { dataTextField: 'Description', dataValueField: 'Id', data: counties, value: countyNameInput, separator: ', ' }"
+                    style="width: 400px" />
+            </li>
+            <li>
+                @Html.LabelFor(model => model.PhoneNumber)
+                <label style="display: inline-block; white-space: nowrap;">
+                    <input type="checkbox" data-bind="checked: phoneNumberInput" />Only Records with Phone Numbers</label>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.SicCode)
+                <div data-bind="kendoSplitter: {max: maxSplitterSize}">
+                    <div id="treeview-sic-code" data-bind="value: sicCodeInput">
+                    </div>
+                </div>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.RenewalMonth)
+                <input data-bind="kendoDropDownList: { dataTextField: 'name', dataValueField: 'Id', data: renewals, value: renewalMonthInput }" />
+            </li>
+            <li>
+                @Html.LabelFor(model => model.EmployeeSize)
+                <div id="slider" style="margin: 30px; width: 500px" data-bind="selectedValues: employeeSizeInput">
+                    <input value="0" />
+                    <input value="6" />
+                </div>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.SearchName)
+                <input class="k-textbox" id="SearchName" name="SearchName" type="text" value="" data-bind="value: searchNameInput" />
+                @Html.ValidationMessageFor(model => model.SearchName)
+            </li>
+            <li>
+                <p style="float: right">
+                    <input type="button" value="Search" data-bind="click: do_search" class="k-button" />
+                    <input type="reset" value="Clear" data-bind="click: do_reset" class="k-button" />
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>

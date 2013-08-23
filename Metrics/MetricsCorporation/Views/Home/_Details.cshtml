@@ -1,0 +1,73 @@
+﻿@model MetricsCorporation.Models.CompanyModel
+<div data-bind="kendoWindow: { isOpen: isOpen, visible: false, actions: ['Close', 'Minimize', 'Maximize', 'Refresh'], modal: true, width: '1000px', height: '740px' }"
+    id="window">
+    <ul style="float: left; width: 400px">
+        <li><a href="#" data-bind="click: DownloadXml">Download File</a>
+            <h2 data-bind="text: CompanyName">
+            </h2>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.CompanyName): &nbsp;&nbsp;&nbsp; <span data-bind="text: CompanyName">
+            </span></li>
+        <li>
+            @Html.DisplayNameFor(model => model.City): &nbsp;&nbsp;&nbsp;<span data-bind="text: City"></span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.State): &nbsp;&nbsp;&nbsp;<span data-bind="text: State"></span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.Zip): &nbsp;&nbsp;&nbsp;<span data-bind="text: Zip"></span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.County): &nbsp;&nbsp;&nbsp;<span data-bind="text: County"></span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.Phone): &nbsp;&nbsp;&nbsp;<span data-bind="text: Phone"></span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.SicCode): &nbsp;&nbsp;&nbsp;<span data-bind="text: SicCode"></span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.RenewalMonth): &nbsp;&nbsp;&nbsp;<span data-bind="text: RenewalMonth"></span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.EmployeeSize): &nbsp;&nbsp;&nbsp;<span data-bind="text: EmployeeSize"></span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.CarrierGroup): &nbsp;&nbsp;&nbsp;<span data-bind="text: CarrierGroup"></span>
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.Address): &nbsp;&nbsp;&nbsp;<span data-bind="text: Address"></span>
+        </li>
+        <li>
+            <input type="button" value="Get Company Contacts" data-bind="click: get_companyContacts"
+                class="k-button" />
+        </li>
+    </ul>
+    <div id="linkedInProfile" style="float: left; width: 400px">
+    </div>
+    <div data-bind="kendoGrid: contacts, gridOptions: contactsGridOptions" style="width: 800px;
+        display: block; float: left" />
+    <div data-bind="kendoWindow: { isOpen: isDetailsOpen, visible: false, actions: ['Close', 'Minimize', 'Maximize', 'Refresh'], modal: true, width: '400px', height: '300px' }"
+        id="detalsWindow">
+        <ul style="float: left;">
+            <li><a href="#" data-bind="click: DownloadUserXml">Download File</a></li>
+            <li>
+                <h1>
+                    User Information</h1>
+            </li>
+            <li>Title: &nbsp;&nbsp;&nbsp; <span data-bind="text: userTitle"></span></li>
+            <li>Graveyard Status: &nbsp;&nbsp;<span data-bind="text: graveyardStatus"></span></li>
+            <li>First Name: &nbsp;&nbsp;<span data-bind="text: firstname"></span></li>
+            <li>Last Name: &nbsp;&nbsp;&nbsp;<span data-bind="text: lastname"></span> </li>
+            <li>City: &nbsp;&nbsp;&nbsp;<span data-bind="text: city"></span> </li>
+            <li>State: &nbsp;&nbsp;&nbsp;<span data-bind="text: state"></span> </li>
+            <li>Country: &nbsp;&nbsp;&nbsp;<span data-bind="text: country"></span> </li>
+            <li>Zip: &nbsp;&nbsp;&nbsp;<span data-bind="text: zip"></span> </li>
+            <li>Area Code: &nbsp;&nbsp;&nbsp;<span data-bind="text: areaCode"></span> </li>
+            <li>Phone: &nbsp;&nbsp;&nbsp;<span data-bind="text: phone"></span> </li>
+            <li>Email: &nbsp;&nbsp;&nbsp;<span data-bind="text: email"></span> </li>
+            <li>Address: &nbsp;&nbsp;&nbsp;<span data-bind="text: address"></span> </li>
+        </ul>
+    </div>
+</div>
